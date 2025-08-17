@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michiko Immigration Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #0f0; /* green text */
+    }
+    header {
+      background: #111;
+      padding: 1em;
+      text-align: center;
+      border-bottom: 3px solid red;
+    }
+    header h1 {
+      color: #0f0;
+      margin: 0;
+    }
+    nav {
+      background: #111;
+      padding: 0.5em;
+      text-align: center;
+    }
+    nav a {
+      color: #0f0;
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    .hero::after {
+      content: "";
+      background: url('https://upload.wikimedia.org/wikipedia/commons/c/c1/Flag_of_Hungary.svg') no-repeat center;
+      background-size: 40%;
+      opacity: 0.1;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+    .mega-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1em;
+      padding: 2em;
+      background: #111;
+    }
+    .tile {
+      background: #222;
+      border: 2px solid red;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .tile:hover {
+      transform: scale(1.05);
+    }
+    .tile img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+    .tile span {
+      display: block;
+      padding: 0.5em;
+      color: #0f0;
+      font-weight: bold;
+    }
+    section {
+      padding: 2em;
+    }
+    h2 {
+      border-bottom: 2px solid red;
+      padding-bottom: 0.5em;
+      color: #0f0;
+    }
+    .card {
+      background: #111;
+      border: 2px solid #0f0;
+      margin: 1em 0;
+      padding: 1em;
+      border-radius: 8px;
+      display: none;
+    }
+    .card.active {
+      display: block;
+    }
+    footer {
+      background: #111;
+      padding: 1em;
+      text-align: center;
+      border-top: 3px solid red;
+      color: #0f0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Michiko Immigration Services</h1>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero">
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop');"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1600&auto=format&fit=crop');"></div>
+  </div>
+
+  <div class="mega-grid">
+    <a class="tile" data-target="Study">
+      <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=600&auto=format&fit=crop" alt="Study in Hungary">
+      <span>Study in Hungary</span>
+    </a>
+    <a class="tile" data-target="Visit">
+      <img src="https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=600&auto=format&fit=crop" alt="Visit Hungary">
+      <span>Visit Hungary</span>
+    </a>
+    <a class="tile" data-target="Work">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format&fit=crop" alt="Work in Hungary">
+      <span>Work in Hungary</span>
+    </a>
+    <a class="tile" data-target="Immigrate">
+      <img src="https://images.unsplash.com/photo-1551739440-5f96f0b9f7f5?q=80&w=600&auto=format&fit=crop" alt="Immigrate to Hungary">
+      <span>Immigrate to Hungary</span>
+    </a>
+    <a class="tile" data-target="Other">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=600&auto=format&fit=crop" alt="Other Services">
+      <span>Other Services</span>
+    </a>
+  </div>
+
+  <section id="services">
+    <h2>Our Services</h2>
+
+    <div class="card" id="card-Study">
+      <h3>For Students</h3>
+      <ul>
+        <li>Student visa applications</li>
+        <li>Residence permits</li>
+        <li>University paperwork support</li>
+      </ul>
+    </div>
+
+    <div class="card" id="card-Visit">
+      <h3>Visit Support</h3>
+      <ul>
+        <li>Visit visa (short stay)</li>
+        <li>Notarization</li>
+        <li>Official appointments</li>
+      </ul>
+    </div>
+
+    <div class="card" id="card-Work">
+      <h3>For Professionals & Companies</h3>
+      <ul>
+        <li>Work permits</li>
+        <li>Company registration support</li>
+        <li>Business administration help</li>
+      </ul>
+    </div>
+
+    <div class="card" id="card-Immigrate">
+      <h3>For Individuals</h3>
+      <ul>
+        <li>Residence permits</li>
+        <li>Family reunification</li>
+        <li>Citizenship guidance</li>
+      </ul>
+    </div>
+
+    <div class="card" id="card-Other">
+      <h3>Other Services</h3>
+      <ul>
+        <li>Translation help</li>
+        <li>Official appointments</li>
+        <li>General administrative support</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We support foreigners in Hungary with immigration, government paperwork, and company registration. Our goal is to make settling in Hungary smooth and stress-free.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: info@michiko.hu</p>
+    <p>Phone: +36 1 234 5678</p>
+    <p>Address: Budapest, Hungary</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Michiko Immigration Services</p>
+  </footer>
+
+  <script>
+    // Hero slider
+    let slides = document.querySelectorAll('.slide');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4000);
+
+    // Mega-menu tiles
+    const tiles = document.querySelectorAll('.tile');
+    const cards = document.querySelectorAll('.card');
+    tiles.forEach(tile => {
+      tile.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('active'));
+        const target = tile.dataset.target;
+        document.getElementById('card-' + target).classList.add('active');
+        window.location.hash = "services";
+      });
+    });
+  </script>
+</body>
+</html>
