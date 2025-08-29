@@ -1,295 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Michiko Immigration Services — Hungary</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Michiko Immigration Services helps foreigners and companies with immigration office procedures, visas, residence permits, and official paperwork in Hungary." />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='black'/%3E%3Cpath d='M8 18h48v28H8z' fill='%23000'/%3E%3Crect x='8' y='18' width='48' height='9' fill='%23C8102E'/%3E%3Crect x='8' y='27' width='48' height='9' fill='white'/%3E%3Crect x='8' y='36' width='48' height='10' fill='%2300843D'/%3E%3C/svg%3E" />
-  <meta property="og:title" content="Michiko Immigration Services — Hungary" />
-  <meta property="og:description" content="Visas, residence permits, study/work support, and company paperwork in Hungary." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://got17.github.io/immigration-website/" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1200&auto=format&fit=crop" />
-
-  <style>
-    :root{
-      --bg:#000; --ink:#C8FFD0; --muted:#8AD9A4; --accent:#C8102E; --border:#171717; --card:#0B0B0B;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;scroll-behavior:smooth}
-    a{color:var(--ink);text-decoration:none}
-    a:hover{color:var(--accent)}
-    img{max-width:100%;display:block}
-
-    /* Global flag watermark */
-    body::before{
-      content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-      background:linear-gradient(to bottom,#C8102E 33%,#fff 33%,#fff 66%,#00843D 66%);
-      opacity:.12; filter:blur(14px) saturate(90%); transform:scale(1.06);
-    }
-
-    header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
-    .nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-    .brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.3px}
-    .brand i{width:20px;height:20px;border-radius:4px;background:linear-gradient(135deg,#0F0F0F,#050505);outline:1px solid #1c1c1c}
-    .menu{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-    .pill{padding:8px 14px;border-radius:999px;border:1px solid #222;background:transparent;color:var(--ink);cursor:pointer}
-    .pill.cta{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
-    .pill:hover{border-color:var(--accent);color:var(--accent)}
-
-    /* Hero */
-    .hero{position:relative;overflow:hidden;min-height:66vh;display:grid;place-items:center;text-align:center}
-    .slides{position:absolute;inset:0}
-    .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
-    .slide.active{opacity:1}
-    .hero::before{content:"";position:absolute;inset:0;opacity:.28;mix-blend-mode:overlay;
-      background:linear-gradient(to bottom,#C8102E 33%,#fff 33%,#fff 66%,#00843D 66%)}
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.85))}
-    .hero .inner{position:relative;z-index:1;max-width:880px;padding:18px;background:rgba(0,0,0,.45);border:1px solid #1c1c1c;border-radius:12px}
-    .hero h1{margin:.2rem 0 .5rem;font-size:clamp(28px,4vw,44px)}
-    .hero p{margin:0 auto 1rem;color:var(--muted);max-width:760px}
-    .controls,.dots{position:absolute;left:0;right:0;display:flex;z-index:2}
-    .controls{top:50%;transform:translateY(-50%);justify-content:space-between;padding:0 14px}
-    .control{background:rgba(0,0,0,.55);color:var(--ink);border:1px solid #2a2a2a;font-size:28px;border-radius:50%;padding:4px 10px;cursor:pointer}
-    .control:hover{color:var(--accent);border-color:var(--accent)}
-    .dots{bottom:14px;justify-content:center;gap:10px}
-    .dot{width:10px;height:10px;border-radius:50%;background:#2a2a2a;border:1px solid #3a3a3a;opacity:.8;cursor:pointer}
-    .dot.active{background:var(--accent);border-color:var(--accent)}
-
-    main{max-width:1100px;margin:auto;padding:40px 16px}
-    h2{color:var(--accent);margin:0 0 12px;font-size:clamp(22px,3vw,32px)}
-    .sub{color:var(--muted);margin:0 0 20px}
-
-    /* Services tiles */
-    .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-    .tile{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s}
-    .tile:hover{transform:translateY(-2px);border-color:var(--accent)}
-    .tile img{width:100%;height:110px;object-fit:cover}
-    .tile span{display:block;padding:10px 12px;font-weight:700}
-    @media (max-width: 900px){ .tiles{grid-template-columns:1fr 1fr} }
-    @media (max-width: 520px){ .tiles{grid-template-columns:1fr} }
-
-    /* Sections */
-    .section{padding:40px 0;border-top:1px solid var(--border)}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-
-    /* Contact form */
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width: 720px){ .grid-2{grid-template-columns:1fr} }
-    label{font-weight:600}
-    input,textarea{background:#0e0e0e;border:1px solid #262626;border-radius:10px;padding:10px 12px;color:var(--ink);outline:none}
-    input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,16,46,.25)}
-    textarea{min-height:120px;resize:vertical}
-
-    footer{padding:24px 16px;border-top:1px solid var(--border);color:var(--muted);text-align:center}
-
-    /* Login modal (front-end demo) */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
-    .modal.open{display:flex}
-    .panel{width:min(460px,92%);background:#0a0a0a;border:1px solid var(--border);border-radius:12px;padding:18px}
-    .panel h3{margin:.2rem 0 10px}
-    .row{display:flex;flex-direction:column;gap:6px;margin:8px 0}
-    .err{color:var(--accent);display:none}
-    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
-    .right{display:flex;gap:10px;align-items:center}
-    .logout{display:none}
-  </style>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":"Michiko Immigration Services",
-    "image":"https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1200&auto=format&fit=crop",
-    "url":"https://got17.github.io/immigration-website/",
-    "address":{"@type":"PostalAddress","addressLocality":"Budapest","addressCountry":"HU"},
-    "description":"Immigration and administrative support in Hungary: visas, residence/work permits, student support, and company paperwork.",
-    "areaServed":"Hungary",
-    "sameAs":[]
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MICHIKO — Immigration Support in Hungary</title>
+<meta name="description" content="Helping individuals and companies navigate Hungarian immigration and government procedures with confidence." />
+<!-- Minimal dark Hungary theme -->
+<style>
+  :root{
+    --bg:#000; --card:#0b0b0b; --ink:#c9ffd2; --muted:#8ad9a4;
+    --accent:#c8102e;  /* red */
+    --accent2:#0f0;    /* green text accent */
+    --line:#171717;
   }
-  </script>
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  a{color:var(--ink);text-decoration:none}
+  a:hover{color:var(--accent)}
+  img{max-width:100%;display:block}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+  .bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;gap:12px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+  .brand i{width:18px;height:18px;border-radius:4px;background:linear-gradient(#0b0b0b,#050505);outline:1px solid #1f1f1f}
+  nav a{margin:0 10px}
+  .lang{display:flex;gap:10px;align-items:center}
+  .pill{padding:8px 12px;border:1px solid #222;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+  .pill.cta{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
+  .pill.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .kbd{font-family:ui-monospace,Menlo,monospace;border:1px solid #333;border-radius:6px;padding:2px 6px;color:#ddd}
+
+  /* Search palette */
+  .palette{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.6);z-index:50}
+  .palette.open{display:flex}
+  .palette .panel{margin-top:10vh;width:min(720px,92%);background:#0a0a0a;border:1px solid #242424;border-radius:12px;overflow:hidden}
+  .palette input{width:100%;background:#0e0e0e;border:0;border-bottom:1px solid #1e1e1e;color:#fff;padding:14px}
+  .palette .results{max-height:50vh;overflow:auto}
+  .palette .row{padding:12px 14px;border-bottom:1px solid #131313}
+  .palette .row b{color:var(--accent2)}
+
+  /* Hero */
+  .hero{position:relative;min-height:64vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+  .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
+  .slide.active{opacity:1}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.88))}
+  .hero .inner{position:relative;z-index:1;max-width:860px;padding:18px;background:rgba(0,0,0,.45);border:1px solid #1b1b1b;border-radius:12px}
+  .hero h1{margin:.3rem 0 .6rem;font-size:clamp(28px,4vw,44px)}
+  .muted{color:var(--muted)}
+  .controls{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;z-index:2}
+  .btn-round{background:rgba(0,0,0,.55);border:1px solid #2a2a2a;border-radius:50%;color:#fff;font-size:26px;line-height:1;padding:6px 12px;cursor:pointer}
+  .btn-round:hover{color:var(--accent);border-color:var(--accent)}
+
+  main{max-width:1100px;margin:auto;padding:36px 16px}
+  h2{color:var(--accent);margin:0 0 12px}
+  .sub{margin:0 0 20px;color:var(--muted)}
+  .section{padding:34px 0;border-top:1px solid #111}
+
+  /* Info cards / services */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .card{grid-column:span 12;background:var(--card);border:1px solid #1a1a1a;border-radius:12px;padding:16px}
+  @media (min-width:900px){
+    .col-6{grid-column:span 6}
+    .col-4{grid-column:span 4}
+  }
+  .card h3{margin:.2rem 0 .6rem;color:var(--accent2)}
+  .list{margin:8px 0 0 0;padding-left:18px}
+  .list li{margin:6px 0}
+  .link{display:inline-block;margin-top:8px;color:var(--accent2);border-bottom:1px dashed var(--accent2)}
+
+  /* Contact */
+  .grid-2{display:grid;grid-template-columns:1fr;gap:14px}
+  @media (min-width:900px){ .grid-2{grid-template-columns:1fr 1fr} }
+  label{font-weight:600}
+  input,textarea{width:100%;background:#0e0e0e;border:1px solid #262626;border-radius:10px;padding:10px 12px;color:#fff;outline:none}
+  input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,16,46,.25)}
+  textarea{min-height:120px;resize:vertical}
+
+  footer{padding:22px 16px;border-top:1px solid #111;color:#8aa090;text-align:center}
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="nav">
-      <div class="brand"><i aria-hidden="true"></i><span>MICHIKO</span></div>
-      <nav class="menu" aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="right">
-        <a id="loginBtn" class="pill" href="#">Sign in</a>
-        <a id="logoutBtn" class="pill logout" href="#">Sign out</a>
-        <a class="pill cta" href="#contact">Enquire Now</a>
-      </div>
-    </div>
-  </header>
+<header>
+  <div class="bar">
+    <div class="brand"><i aria-hidden="true"></i><span>MICHIKO</span></div>
 
-  <section class="hero" id="home" aria-label="Hero">
-    <div class="slides" aria-hidden="true">
-      <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1920&auto=format&fit=crop');"></div>
-      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1920&auto=format&fit=crop');"></div>
-      <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1920&auto=format&fit=crop');"></div>
-    </div>
-    <div class="inner">
-      <h1>Trusted Immigration Support in Hungary</h1>
-      <p>Visas, residence/work permits, study & company support — secure, clear, and on time.</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px">
-        <a class="pill cta" href="#services">Explore Services</a>
-        <a class="pill" href="#contact">Contact Us</a>
-      </div>
-    </div>
-    <div class="controls">
-      <button class="control prev" aria-label="Previous slide">&#10094;</button>
-      <button class="control next" aria-label="Next slide">&#10095;</button>
-    </div>
-    <div class="dots" aria-label="Slide navigation"></div>
-  </section>
+    <nav aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a id="openSearch" class="pill ghost" href="#">Search <span class="kbd">⌘/Ctrl+K</span></a>
+    </nav>
 
-  <main>
-    <section class="section" id="services">
-      <h2>Services</h2>
-      <p class="sub">Choose what you need — we’ll guide you step by step.</p>
-      <div class="tiles" id="tiles">
-        <a class="tile" data-target="Study">
-          <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=800&auto=format&fit=crop" alt="Study in Hungary" />
-          <span>Study in Hungary</span>
-        </a>
-        <a class="tile" data-target="Visit">
-          <img src="https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=800&auto=format&fit=crop" alt="Visit Hungary" />
-          <span>Visit Hungary</span>
-        </a>
-        <a class="tile" data-target="Work">
-          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop" alt="Work in Hungary" />
-          <span>Work in Hungary</span>
-        </a>
-        <a class="tile" data-target="Immigrate">
-          <img src="https://images.unsplash.com/photo-1551739440-5f96f0b9f7f5?q=80&w=800&auto=format&fit=crop" alt="Immigrate to Hungary" />
-          <span>Immigrate to Hungary</span>
-        </a>
-        <a class="tile" data-target="Other">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="Other Services" />
-          <span>Other Services</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <h2>About Us</h2>
-      <div class="card">
-        <p>We support foreigners and companies in Hungary with immigration office procedures, visas, residence & work permits, and official paperwork. Multilingual team, GDPR-friendly handling, and dependable timelines.</p>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <h2>Contact</h2>
-      <div class="grid-2">
-        <form class="card" onsubmit="event.preventDefault(); alert('Thanks! We will get back to you shortly.'); this.reset();">
-          <div>
-            <label for="name">Full name</label>
-            <input id="name" name="name" required placeholder="Your name"/>
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" required placeholder="you@email.com"/>
-          </div>
-          <div style="grid-column:1/-1">
-            <label for="msg">Message</label>
-            <textarea id="msg" name="message" required placeholder="How can we help?"></textarea>
-          </div>
-          <div style="margin-top:8px">
-            <button class="pill cta" type="submit">Send</button>
-          </div>
-        </form>
-        <div class="card">
-          <p><strong>MICHIKO</strong><br/>Budapest, Hungary</p>
-          <p>Email: <a href="mailto:info@michiko.hu">info@michiko.hu</a><br/>Phone: <a href="tel:+36">+36 …</a></p>
-          <div style="height:180px;background:#0b0b0b;border:1px solid var(--border);border-radius:10px;display:grid;place-items:center;color:var(--muted)">Map placeholder</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>© <span id="year"></span> Michiko Immigration Services — All rights reserved.</footer>
-
-  <!-- Login Modal (front-end demo auth) -->
-  <div class="modal" id="authModal" aria-modal="true" role="dialog" aria-labelledby="loginTitle">
-    <div class="panel">
-      <h3 id="loginTitle">Sign in to continue</h3>
-      <div class="row">
-        <label for="lemail">Email</label>
-        <input id="lemail" type="email" placeholder="you@email.com" />
-      </div>
-      <div class="row">
-        <label for="lpass">Password</label>
-        <input id="lpass" type="password" placeholder="••••••••" />
-      </div>
-      <div id="err" class="err">Please enter a valid email and password (8+ characters).</div>
-      <div class="actions">
-        <button id="doLogin" class="pill cta" type="button">Sign in</button>
-        <button id="cancelLogin" class="pill" type="button">Cancel</button>
-      </div>
-      <p class="sub" style="margin-top:10px">Demo only (front-end). For production, use secure server-side authentication and EU (GDPR) hosting.</p>
+    <div class="lang" aria-label="Language">
+      <a href="#" class="pill ghost" data-lang="EN">EN</a>
+      <a href="#" class="pill ghost" data-lang="HU">HU</a>
+      <a href="#" class="pill ghost" data-lang="JA">JA</a>
+      <a class="pill cta" href="#contact">Get Help</a>
     </div>
   </div>
+</header>
 
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+<!-- Search palette -->
+<div id="palette" class="palette" role="dialog" aria-modal="true">
+  <div class="panel">
+    <input id="q" placeholder="Search site (services, contact, visa…)" />
+    <div id="results" class="results"></div>
+  </div>
+</div>
 
-    // Hero slider
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const dotsWrap = document.querySelector('.dots');
-    slides.forEach((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i===0?' active':''); d.addEventListener('click',()=>{go(i);resetAuto();}); dotsWrap.appendChild(d); });
-    const dots = Array.from(document.querySelectorAll('.dot'));
-    let idx=0, auto=setInterval(next,5000);
-    function go(i){ slides[idx].classList.remove('active'); dots[idx].classList.remove('active'); idx=i; slides[idx].classList.add('active'); dots[idx].classList.add('active'); }
-    function next(){ go((idx+1)%slides.length); }
-    function prev(){ go((idx-1+slides.length)%slides.length); }
-    document.querySelector('.next').addEventListener('click',()=>{next();resetAuto();});
-    document.querySelector('.prev').addEventListener('click',()=>{prev();resetAuto();});
-    function resetAuto(){ clearInterval(auto); auto=setInterval(next,5000); }
+<section id="home" class="hero" aria-label="Hero">
+  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1920&auto=format&fit=crop');"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1920&auto=format&fit=crop');"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1920&auto=format&fit=crop');"></div>
 
-    // Simple sign-in gate (front-end demo)
-    const AUTH_KEY='michiko_logged_in';
-    const loginBtn=document.getElementById('loginBtn');
-    const logoutBtn=document.getElementById('logoutBtn');
-    const modal=document.getElementById('authModal');
-    const lemail=document.getElementById('lemail');
-    const lpass=document.getElementById('lpass');
-    const err=document.getElementById('err');
+  <div class="controls">
+    <button class="btn-round" id="prev" aria-label="Previous slide">❮</button>
+    <button class="btn-round" id="next" aria-label="Next slide">❯</button>
+  </div>
 
-    function isLogged(){ return localStorage.getItem(AUTH_KEY)==='1'; }
-    function openModal(){ modal.classList.add('open'); setTimeout(()=>lemail.focus(),0); }
-    function closeModal(){ modal.classList.remove('open'); }
-    function updateAuthUI(){ if(isLogged()){ loginBtn.style.display='none'; logoutBtn.style.display='inline-flex'; } else { loginBtn.style.display='inline-flex'; logoutBtn.style.display='none'; } }
-    loginBtn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
-    logoutBtn.addEventListener('click', (e)=>{ e.preventDefault(); localStorage.removeItem(AUTH_KEY); updateAuthUI(); alert('Signed out.'); });
-    document.getElementById('cancelLogin').addEventListener('click', closeModal);
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
-    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
-    document.getElementById('doLogin').addEventListener('click', ()=>{
-      const okEmail=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(lemail.value.trim());
-      const okPass=(lpass.value||'').length>=8;
-      if(!okEmail||!okPass){ err.style.display='block'; return; }
-      err.style.display='none'; localStorage.setItem(AUTH_KEY,'1'); closeModal(); updateAuthUI();
-      // continue to Services
-      document.getElementById('services').scrollIntoView({behavior:'smooth'});
-    });
-    updateAuthUI();
+  <div class="inner">
+    <h1>Trusted Immigration Support in Hungary</h1>
+    <p class="muted">Helping individuals and companies navigate Hungarian immigration and government procedures with confidence.</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px">
+      <a class="pill cta" href="#contact">Get Started</a>
+      <a class="pill ghost" href="#services">See Services</a>
+    </div>
+  </div>
+</section>
 
-    // Gate tiles (require sign-in first). Set REQUIRE_LOGIN=false to disable gate.
-    const REQUIRE_LOGIN = true;
-    document.querySelectorAll('.tile').forEach(tile=>{
-      tile.addEventListener('click',(e)=>{
-        if(!REQUIRE_LOGIN || isLogged()) return; // allow
-        e.preventDefault(); openModal();
-      });
-    });
-  </script>
+<main>
+  <!-- About -->
+  <section id="about" class="section">
+    <h2>About MICHIKO</h2>
+    <p class="sub">Our multilingual team supports residence and work permits, company paperwork, and official procedures—clearly, securely, and on time.</p>
+    <div class="grid">
+      <article class="card col-6">
+        <h3>What clients value</h3>
+        <ul class="list">
+          <li>Clear guidance and transparent steps</li>
+          <li>Multilingual support (English, Hungarian, Japanese)</li>
+          <li>Secure handling of documents (GDPR-friendly)</li>
+        </ul>
+      </article>
+      <figure class="card col-6" aria-label="Budapest skyline">
+        <img alt="Budapest night skyline" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <h2>Services</h2>
+    <p class="sub">Support for individuals and companies. Simple, reliable, and compliant.</p>
+
+    <div class="grid">
+      <article class="card col-6">
+        <h3>For Individuals</h3>
+        <p>Residence &amp; work permits, family reunification, renewals, and appointments.</p>
+        <a class="link" href="#contact">Learn more →</a>
+        <ul class="list">
+          <li>Residence permit (new / renewal)</li>
+          <li>Work permit application</li>
+          <li>Family reunification</li>
+          <li>Address card &amp; registration</li>
+          <li>Authority appointment booking</li>
+        </ul>
+      </article>
+
+      <article class="card col-6">
+        <h3>For Students</h3>
+        <p>Study in Hungary, student visas, extensions, and official paperwork.</p>
+        <a class="link" href="#contact">Learn more →</a>
+        <ul class="list">
+          <li>Student visa application</li>
+          <li>Residence permit for studies (new / extension)</li>
+          <li>Bank, insurance, university letters</li>
+          <li>Translations &amp; document prep</li>
+        </ul>
+      </article>
+
+      <article class="card col-6">
+        <h3>For Companies</h3>
+        <p>Company registration, employee immigration support, translation &amp; filing.</p>
+        <a class="link" href="#contact">Learn more →</a>
+        <ul class="list">
+          <li>Work permit &amp; residence for employees</li>
+          <li>Company registration paperwork</li>
+          <li>Official translations &amp; contracts</li>
+          <li>Relocation &amp; onboarding support</li>
+        </ul>
+      </article>
+
+      <article class="card col-6">
+        <h3>Additional Support</h3>
+        <p>Notarization, official appointments, document prep, and guidance.</p>
+        <a class="link" href="#contact">Learn more →</a>
+        <ul class="list">
+          <li>Visit visa (short stay)</li>
+          <li>Notarization</li>
+          <li>Official appointments</li>
+          <li>Document preparation</li>
+          <li>General guidance / consulting</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p class="sub">Send us a message and our team will get back to you.</p>
+    <div class="grid-2">
+      <form class="card" onsubmit="event.preventDefault(); alert('Thanks! We will reply shortly.'); this.reset();">
+        <div>
+          <label for="name">Full name</label>
+          <input id="name" name="name" required placeholder="Your name">
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@email.com">
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" placeholder="+36 …">
+        </div>
+        <div>
+          <label for="msg">Message</label>
+          <textarea id="msg" name="message" required placeholder="How can we help?"></textarea>
+        </div>
+        <div><button class="pill cta" type="submit">Send</button></div>
+      </form>
+      <aside class="card">
+        <p><strong>MICHIKO</strong><br>Budapest, Hungary</p>
+        <p>Email: <a href="mailto:hello@michiko.hu">hello@michiko.hu</a><br>
+           Phone: <a href="tel:+36">+36 …</a></p>
+        <div style="height:180px;border:1px solid #1a1a1a;border-radius:10px;display:grid;place-items:center;color:#8aa090">Map placeholder</div>
+        <p style="margin-top:10px;font-size:.95rem;color:#8aa090">GDPR notice: data handled in EU, secure by design.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> MICHIKO — All rights reserved.</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Simple slider
+  const slides = [...document.querySelectorAll('.slide')];
+  let s = 0;
+  const show = i => { slides[s].classList.remove('active'); s = i; slides[s].classList.add('active'); };
+  document.getElementById('next').onclick = () => show((s+1)%slides.length);
+  document.getElementById('prev').onclick = () => show((s-1+slides.length)%slides.length);
+  setInterval(()=>document.getElementById('next').click(), 5000);
+
+  // Command palette (⌘/Ctrl+K)
+  const pal = document.getElementById('palette'), q = document.getElementById('q'), res = document.getElementById('results');
+  const index = [
+    {t:'Services — Individuals', href:'#services'},
+    {t:'Services — Students', href:'#services'},
+    {t:'Services — Companies', href:'#services'},
+    {t:'Contact form', href:'#contact'},
+    {t:'About Michiko', href:'#about'}
+  ];
+  function openPal(){ pal.classList.add('open'); q.value=''; render(''); setTimeout(()=>q.focus(),0); }
+  function closePal(){ pal.classList.remove('open'); }
+  function render(term){
+    const v = term.toLowerCase();
+    res.innerHTML = index.filter(i=>i.t.toLowerCase().includes(v)).map(i=>`<div class="row"><a href="${i.href}" onclick="document.getElementById('palette').classList.remove('open')"><b>${i.t}</b></a></div>`).join('');
+  }
+  document.getElementById('openSearch').onclick = (e)=>{ e.preventDefault(); openPal(); };
+  q.oninput = (e)=>render(e.target.value);
+  pal.onclick = (e)=>{ if(e.target===pal) closePal(); };
+  window.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); pal.classList.contains('open')?closePal():openPal(); }
+    if(e.key==='Escape') closePal();
+  });
+
+  // Language toggles (placeholder)
+  document.querySelectorAll('[data-lang]').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{ e.preventDefault(); alert('Language switcher placeholder: '+btn.dataset.lang); });
+  });
+</script>
 </body>
 </html>
