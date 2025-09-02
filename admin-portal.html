@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Portal - Prototype</title>
+  <style>
+    :root{
+      --bg:#0b1220;           /* dark navy */
+      --surface:#101a2b;      /* cards */
+      --surface-2:#0d1728;    /* header/sidebar */
+      --border:#1e2a44;       /* outlines */
+      --muted:#8aa0c6;        /* secondary text */
+      --text:#dbe7ff;         /* main text */
+      --accent:#2d6cdf;       /* primary */
+      --accent-2:#22b07d;     /* success */
+      --warning:#d97706;      /* warning */
+      --danger:#ef4444;       /* danger */
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"}
+    a{color:inherit}
+
+    /* Layout */
+    .app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+    .sidebar{background:var(--surface-2);border-right:1px solid var(--border);padding:20px;position:sticky;top:0;height:100vh}
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:20px}
+    .brand-logo{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#6aa1ff)}
+    .brand h1{font-size:16px;margin:0;letter-spacing:.4px}
+    .nav{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+    .nav button{all:unset;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;color:var(--text);cursor:pointer}
+    .nav button.active,.nav button:hover{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));outline:1px solid var(--border)}
+    .nav .badge{margin-left:auto;background:rgba(255,255,255,.07);padding:2px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .sidebar .foot{position:absolute;bottom:16px;left:20px;right:20px;color:var(--muted);font-size:12px}
+
+    .main{display:grid;grid-template-rows:auto 1fr;min-width:0}
+    .toolbar{position:sticky;top:0;z-index:3;background:var(--surface-2);border-bottom:1px solid var(--border);padding:12px 18px;display:flex;gap:12px;align-items:center}
+    .toolbar .search{flex:1;min-width:180px}
+    .input{width:100%;background:var(--surface);border:1px solid var(--border);padding:10px 12px;border-radius:12px;color:var(--text)}
+    .select{appearance:none;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:12px;cursor: pointer;}
+    .btn{all:unset;display:inline-flex;gap:8px;align-items:center;background:var(--accent);color:white;padding:10px 14px;border-radius:12px;cursor:pointer;box-shadow:var(--shadow)}
+    .btn.secondary{background:transparent;border:1px solid var(--border);box-shadow:none;color:var(--text)}
+    .btn.ghost{background:transparent;box-shadow:none;color:var(--muted)}
+    .btn:active{transform:translateY(1px)}
+
+    .content{padding:18px;display:grid;gap:14px}
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:12px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+    .card h3{margin:0 0 6px 0;font-size:13px;color:var(--muted);font-weight:600}
+    .card .value{font-size:22px;font-weight:700}
+
+    /* Table */
+    .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);text-align:left;font-size:12px;color:var(--muted);padding:10px;z-index:1}
+    tbody td{padding:10px;border-bottom:1px solid var(--border)}
+    tbody tr:hover{background:rgba(255,255,255,.03)}
+    .avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#304f8f,#1f3a6b);display:inline-block;margin-right:8px}
+    .muted{color:var(--muted)}
+    .status{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border)}
+    .st-new{background:rgba(45,108,223,.1)}
+    .st-progress{background:rgba(45,108,223,.18)}
+    .st-wait{background:rgba(217,119,6,.15)}
+    .st-submitted{background:rgba(234,179,8,.12)}
+    .st-completed{background:rgba(34,176,125,.15)}
+    .st-hold{background:rgba(239,68,68,.12)}
+    .switch{position:relative;display:inline-block;width:42px;height:24px}
+    .switch input{opacity:0;width:0;height:0}
+    .slider{position:absolute;cursor:pointer;inset:0;background:#23304f;border:1px solid var(--border);transition:.2s;border-radius:999px}
+    .slider:before{content:"";position:absolute;height:18px;width:18px;left:3px;top:50%;transform:translateY(-50%);background:white;border-radius:50%;transition:.2s}
+    .switch input:checked + .slider{background:var(--accent)}
+    .switch input:checked + .slider:before{left:21px}
+    .sortable{cursor: pointer;}
+
+    .actions{display:flex;gap:6px}
+    .chip{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);font-size:12px;color:var(--muted)}
+
+    /* Pagination */
+    .pager{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;color:var(--muted)}
+    .pager .btn{padding:6px 10px}
+
+    /* Drawer */
+    .drawer{position:fixed;top:0;right:-520px;width:520px;height:100vh;background:var(--surface-2);border-left:1px solid var(--border);box-shadow:var(--shadow);transition:right .25s ease;z-index:50;display:flex;flex-direction:column}
+    .drawer.open{right:0}
+    .drawer-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .drawer-body{padding:16px;overflow:auto;display:grid;gap:12px}
+    .kv{display:grid;grid-template-columns:120px 1fr;gap:6px;align-items:center}
+    .divider{height:1px;background:var(--border);margin:4px 0}
+
+    /* File list */
+    .files{display:grid;gap:8px}
+    .file{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+    .file .blob{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#3b82f6,#06b6d4)}
+
+    /* Upload */
+    .drop{border:2px dashed var(--border);border-radius:14px;padding:16px;text-align:center;color:var(--muted);background:rgba(255,255,255,.03)}
+    .drop.drag{background:rgba(45,108,223,.12);border-color:var(--accent)}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(1,5,15,.6);display:none;align-items:center;justify-content:center;z-index:60}
+    .modal.open{display:flex}
+    .modal .panel{width:min(560px,92vw);background:var(--surface-2);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:16px}
+    .modal .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    /* Toasts */
+    .toasts{position:fixed;bottom:16px;right:16px;display:grid;gap:8px;z-index:100}
+    .toast{background:var(--surface-2);border:1px solid var(--border);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow)}
+
+    /* Utilities */
+    .row{display:flex;gap:10px;align-items:center}
+    .grow{flex:1}
+    .right{margin-left:auto}
+    .hide{display:none}
+    .small{font-size:12px}
+    .danger{color:var(--danger)}
+    .success{color:var(--accent-2)}
+    .warning{color:var(--warning)}
+
+    @media (max-width: 1100px){
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .app{grid-template-columns: 1fr}
+      .sidebar{position:static;height:auto}
+    }
+  </style>
+</head>
+<body>
+<div class="app" id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Sidebar">
+    <div class="brand" title="Admin Portal">
+      <div class="brand-logo" aria-hidden="true"></div>
+      <h1>Immigration Admin</h1>
+    </div>
+    <div class="nav" role="navigation">
+      <button class="active" aria-current="page">🏠 Dashboard</button>
+      <button>👤 Clients <span class="badge" id="badgeClients">0</span></button>
+      <button>📄 Documents</button>
+      <button>⚙️ Settings</button>
+    </div>
+    <div class="foot">Prototype • GDPR-safe demo data
+      <div class="small">All data stored locally in your browser.</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- TOOLBAR -->
+    <div class="toolbar" role="region" aria-label="Toolbar">
+      <div class="search"><input id="searchInput" class="input" placeholder="Search clients by name, email, id… (press /)" autocomplete="off"></div>
+      <select id="statusFilter" class="select" title="Filter by status">
+        <option value="">All statuses</option>
+        <option>New</option>
+        <option>In Progress</option>
+        <option>Waiting on Client</option>
+        <option>Submitted</option>
+        <option>Completed</option>
+        <option>On Hold</option>
+      </select>
+      <button id="btnExport" class="btn secondary" title="Export clients to CSV">⬇️ Export CSV</button>
+      <button id="btnGdpr" class="btn ghost" title="Toggle GDPR mode (mask PII)">🕵️ GDPR Mode: <span id="gdprState">Off</span></button>
+      <button id="btnNew" class="btn" title="Add a new client (n)">+ New Client</button>
+    </div>
+
+    <!-- CONTENT -->
+    <section class="content">
+      <div class="cards" id="stats">
+        <div class="card"><h3>Total Clients</h3><div class="value" id="statTotal">0</div></div>
+        <div class="card"><h3>In Progress</h3><div class="value" id="statProgress">0</div></div>
+        <div class="card"><h3>Waiting on Client</h3><div class="value" id="statWaiting">0</div></div>
+        <div class="card"><h3>Completed</h3><div class="value" id="statCompleted">0</div></div>
+      </div>
+
+      <div class="table-wrap">
+        <table aria-label="Clients table">
+          <thead>
+            <tr>
+              <th style="width:34px"></th>
+              <th data-sort="name" class="sortable">Client <span id="sortName" class="muted">⇵</span></th>
+              <th data-sort="email" class="sortable">Email <span id="sortEmail" class="muted">⇵</span></th>
+              <th data-sort="caseType" class="sortable">Case <span id="sortCase" class="muted">⇵</span></th>
+              <th>Status</th>
+              <th>2FA</th>
+              <th data-sort="files" class="sortable">Files <span id="sortFiles" class="muted">⇵</span></th>
+              <th data-sort="updatedAt" class="sortable">Last Update <span id="sortUpdated" class="muted">⇵</span></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <div class="pager">
+          <div>
+            Rows per page
+            <select id="rowsPerPage" class="select" style="padding:6px 8px">
+              <option>5</option>
+              <option selected>10</option>
+              <option>20</option>
+            </select>
+          </div>
+          <div class="row">
+            <span id="pageInfo">0-0 of 0</span>
+            <button id="prevPage" class="btn secondary" aria-label="Previous page">◀</button>
+            <button id="nextPage" class="btn secondary" aria-label="Next page">▶</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- DRAWER: Client details -->
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Client details">
+    <div class="drawer-header">
+      <div class="row">
+        <div class="avatar" aria-hidden="true"></div>
+        <div>
+          <div id="drawerName" style="font-weight:700"></div>
+          <div id="drawerEmail" class="small muted"></div>
+        </div>
+      </div>
+      <button class="btn secondary" id="closeDrawer">✕</button>
+    </div>
+    <div class="drawer-body">
+      <div class="kv"><div>Client ID</div><div id="drawerId" class="chip"></div></div>
+      <div class="kv"><div>Case Type</div><div id="drawerCase"></div></div>
+      <div class="kv"><div>Status</div>
+        <div>
+          <select id="drawerStatus" class="select"></select>
+          <span id="statusHint" class="small muted">Change to update dashboard</span>
+        </div>
+      </div>
+      <div class="kv"><div>2FA</div>
+        <label class="switch"><input id="drawer2fa" type="checkbox"><span class="slider"></span></label>
+      </div>
+      <div class="divider"></div>
+
+      <h3 style="margin:6px 0 0 0;font-size:13px;color:var(--muted)">Files</h3>
+      <div id="drop" class="drop" tabindex="0">Drag & drop files here or <label for="fileInput" style="text-decoration:underline;cursor:pointer">browse</label>
+        <input id="fileInput" type="file" multiple class="hide" />
+        <div class="small muted" style="margin-top:6px">(For the prototype, files are stored in your browser. Large files may only store metadata.)</div>
+      </div>
+      <div id="files" class="files"></div>
+
+      <div class="divider"></div>
+      <h3 style="margin:6px 0 0 0;font-size:13px;color:var(--muted)">Notes</h3>
+      <textarea id="drawerNotes" style="width: 100%; height: 6rem;" class="input" rows="20" placeholder="Add private notes…"></textarea>
+      <div class="row" style="justify-content:flex-end">
+        <button id="saveNotes" class="btn secondary">💾 Save Notes</button>
+      </div>
+
+      <div class="divider"></div>
+      <h3 style="margin:6px 0 0 0;font-size:13px;color:var(--muted)">Activity</h3>
+      <div id="activity" class="files"></div>
+      <div class="row" style="justify-content:flex-end">
+        <button id="deleteClient" class="btn secondary danger">🗑 Delete Client</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- MODAL: New Client -->
+<div id="modalNew" class="modal" role="dialog" aria-modal="true" aria-label="Add client">
+  <div class="panel">
+    <div class="row" style="justify-content:space-between;margin-bottom:8px">
+      <h2 style="margin:0;font-size:16px">Add Client</h2>
+      <button id="closeModalNew" class="btn secondary">✕</button>
+    </div>
+    <div class="grid">
+      <div>
+        <label class="small muted">Full Name</label>
+        <input id="newName" class="input" placeholder="e.g., Jane Doe" />
+      </div>
+      <div>
+        <label class="small muted">Email</label>
+        <input id="newEmail" type="email" class="input" placeholder="e.g., jane@example.com" />
+      </div>
+      <div>
+        <label class="small muted">Case Type</label>
+        <select id="newCase" class="select">
+          <option>Residence Permit</option>
+          <option>Work Permit</option>
+          <option>Company Registration</option>
+          <option>Address Card</option>
+        </select>
+      </div>
+      <div>
+        <label class="small muted">Initial Status</label>
+        <select id="newStatus" class="select">
+          <option>New</option>
+          <option>In Progress</option>
+          <option>Waiting on Client</option>
+          <option>Submitted</option>
+          <option>Completed</option>
+          <option>On Hold</option>
+        </select>
+      </div>
+      <div class="row" style="align-items:center;margin-top:6px">
+        <label class="small muted">Require 2FA &nbsp;</label>
+        <label class="switch"><input id="new2fa" type="checkbox"><span class="slider"></span></label>
+      </div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:14px">
+      <button class="btn secondary" id="cancelNew">Cancel</button>
+      <button class="btn" id="createNew">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="toasts" id="toasts"></div>
+
+<script>
+(function(){
+  // ---------------------- Utilities ----------------------
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const fmtDate = ts => new Date(ts).toLocaleString();
+  const uid = () => Math.random().toString(36).slice(2,9);
+  const debounce = (fn, ms=200)=>{let t;return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms)} };
+  const toast = (msg)=>{
+    const t = document.createElement('div');
+    t.className='toast'; t.textContent=msg;
+    $('#toasts').appendChild(t);
+    setTimeout(()=>t.remove(), 2600);
+  }
+  const maskEmail = e => e.replace(/(^.).+(@.).+$/, '$1***$2***');
+  const maskName = n => {
+    const parts = n.split(' '); return parts.map((p,i)=> i===0 ? p[0]+'***' : (p[0]||'')+'***').join(' ')
+  }
+
+  // ---------------------- State ----------------------
+  const STORAGE_KEY = 'adminPortalData.v1';
+  const state = {
+    clients: [],
+    gdpr: false,
+    sort: {key:'updatedAt', dir:'desc'},
+    page: 1,
+    rows: 10,
+    filterStatus: '',
+    search: ''
+  };
+
+  const STATUSES = ['New','In Progress','Waiting on Client','Submitted','Completed','On Hold'];
+  const STATUS_CLASS = {
+    'New':'st-new',
+    'In Progress':'st-progress',
+    'Waiting on Client':'st-wait',
+    'Submitted':'st-submitted',
+    'Completed':'st-completed',
+    'On Hold':'st-hold'
+  };
+
+  function load(){
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      try{Object.assign(state, JSON.parse(raw));}catch{ /* ignore */ }
+    }
+    if(!state.clients || state.clients.length===0){ seed(); save(); }
+  }
+  function save(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+  function reset(){ localStorage.removeItem(STORAGE_KEY); location.reload(); }
+
+  function seed(){
+    const now = Date.now();
+    state.clients = [
+      c('Jane Smith','jane.smith@example.com','Residence Permit','In Progress', true, now-3600_000, 4),
+      c('Akira Tanaka','akira.t@example.jp','Company Registration','Waiting on Client', false, now-86_400_000*2, 2),
+      c('Peter Kovács','p.kovacs@example.hu','Work Permit','New', false, now-86_400_000*5, 0),
+      c('Maria Garcia','maria.g@example.es','Address Card','Submitted', true, now-86_400_000*1.2, 1),
+      c('John Doe','john.d@example.com','Residence Permit','Completed', true, now-86_400_000*20, 8),
+      c('Luca Rossi','l.rossi@example.it','Work Permit','On Hold', false, now-86_400_000*3.5, 3),
+      c('Hannah Lee','h.lee@example.kr','Company Registration','In Progress', false, now-86_400_000*0.8, 6),
+      c('Noémi Nagy','n.nagy@example.hu','Residence Permit','In Progress', true, now-86_400_000*9, 5),
+      c('Daniel Müller','daniel.m@example.de','Work Permit','Waiting on Client', false, now-86_400_000*1.7, 1),
+      c('Sofia Petrova','sofia.p@example.bg','Address Card','New', false, now-86_400_000*0.2, 0),
+    ];
+    function c(name,email,caseType,status,twoFA,updatedAt,fileCount){
+      const id = 'CL-'+(Math.random()*1e6|0);
+      const files = Array.from({length:fileCount},(_,i)=>({id:uid(),name:`${caseType.replace(/\s/g,'_').toLowerCase()}_${i+1}.pdf`, size: (50+i*10)*1024, type:'application/pdf', uploadedAt: updatedAt - (i+1)*40_000, uploadedBy:'admin', data:null }));
+      return {id,name,email,caseType,status,twoFA, files, updatedAt, createdAt: updatedAt-86_400_000*10, notes:'', activity: [{ts:updatedAt, text:`Status set to ${status}`}] };
+    }
+  }
+
+  // ---------------------- Rendering ----------------------
+  function render(){
+    $('#gdprState').textContent = state.gdpr? 'On':'Off';
+    $('#rowsPerPage').value = String(state.rows);
+    $('#statusFilter').value = state.filterStatus || '';
+    $('#searchInput').value = state.search;
+
+    // Stats
+    const total = state.clients.length;
+    const progress = state.clients.filter(x=>x.status==='In Progress').length;
+    const waiting = state.clients.filter(x=>x.status==='Waiting on Client').length;
+    const completed = state.clients.filter(x=>x.status==='Completed').length;
+    $('#statTotal').textContent = total; $('#statProgress').textContent = progress; $('#statWaiting').textContent = waiting; $('#statCompleted').textContent = completed;
+    $('#badgeClients').textContent = total;
+
+    // Rows
+    const rows = filteredSorted();
+    const startIndex = (state.page-1)*state.rows;
+    const pageRows = rows.slice(startIndex, startIndex+state.rows);
+
+    const tbody = $('#tbody'); tbody.innerHTML='';
+    for(const row of pageRows){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><span class="avatar" aria-hidden="true"></span></td>
+        <td><div style="font-weight:600">${displayName(row.name)}</div><div class="small muted">${row.id}</div></td>
+        <td class="muted">${displayEmail(row.email)}</td>
+        <td>${row.caseType}</td>
+        <td>
+          <span class="status ${STATUS_CLASS[row.status]}">
+            <select data-id="${row.id}" class="select small statusSelect" style="padding:4px 6px">${statusOptions(row.status)}</select>
+          </span>
+        </td>
+        <td>
+          <label class="switch">
+            <input data-id="${row.id}" class="twofaToggle" type="checkbox" ${row.twoFA?'checked':''}>
+            <span class="slider"></span>
+          </label>
+        </td>
+        <td>${row.files.length}</td>
+        <td class="muted">${new Date(row.updatedAt).toLocaleDateString()} ${new Date(row.updatedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</td>
+        <td>
+          <div class="actions">
+            <button class="btn secondary openDrawer" data-id="${row.id}">View</button>
+            <button class="btn secondary uploadAction" data-id="${row.id}">Upload</button>
+          </div>
+        </td>`;
+      tbody.appendChild(tr);
+    }
+
+    // Page info
+    const end = Math.min(startIndex+state.rows, rows.length);
+    const start = rows.length ? startIndex+1 : 0;
+    $('#pageInfo').textContent = `${start}–${end} of ${rows.length}`;
+
+    // Wire row controls
+    $$('.statusSelect').forEach(el=> el.addEventListener('change', (e)=>{
+      const id = el.getAttribute('data-id'); const item = state.clients.find(c=>c.id===id);
+      item.status = el.value; item.updatedAt = Date.now();
+      item.activity.unshift({ts:item.updatedAt, text:`Status set to ${item.status}`});
+      save(); render(); toast('Status updated');
+    }));
+    $$('.twofaToggle').forEach(el=> el.addEventListener('change', ()=>{
+      const id = el.getAttribute('data-id'); const item = state.clients.find(c=>c.id===id);
+      item.twoFA = el.checked; item.updatedAt = Date.now();
+      item.activity.unshift({ts:item.updatedAt, text:`2FA ${item.twoFA?'enabled':'disabled'}`});
+      save(); render(); toast('2FA setting saved');
+    }));
+    $$('.openDrawer').forEach(btn=> btn.addEventListener('click', ()=> openDrawer(btn.getAttribute('data-id'))));
+    $$('.uploadAction').forEach(btn=> btn.addEventListener('click', ()=> { openDrawer(btn.getAttribute('data-id')); $('#fileInput').click(); }));
+
+    // sort headers
+    $$('.sortable').forEach(th => th.onclick = ()=> setSort(th.getAttribute('data-sort')));
+    updateSortIcons();
+  }
+
+  function statusOptions(sel){
+    return STATUSES.map(s=>`<option ${s===sel?'selected':''}>${s}</option>`).join('');
+  }
+  function displayName(n){ return state.gdpr ? maskName(n) : n }
+  function displayEmail(e){ return state.gdpr ? maskEmail(e) : e }
+
+  function filteredSorted(){
+    const q = state.search.trim().toLowerCase();
+    let rows = state.clients.filter(c => (!state.filterStatus || c.status===state.filterStatus) && (!q || [c.name,c.email,c.id].some(x=>x.toLowerCase().includes(q))));
+    rows.sort((a,b)=>{
+      const dir = state.sort.dir==='asc' ? 1 : -1;
+      const k = state.sort.key;
+      if(k==='files') return (a.files.length - b.files.length) * dir;
+      if(k==='updatedAt') return (a.updatedAt - b.updatedAt) * dir;
+      return String(a[k]).localeCompare(String(b[k])) * dir;
+    });
+    return rows;
+  }
+  function setSort(key){
+    if(state.sort.key===key){ state.sort.dir = state.sort.dir==='asc'?'desc':'asc' } else { state.sort.key = key; state.sort.dir='asc' }
+    render();
+  }
+  function updateSortIcons(){
+    const map = {name:'#sortName', email:'#sortEmail', caseType:'#sortCase', files:'#sortFiles', updatedAt:'#sortUpdated'};
+    Object.entries(map).forEach(([k,sel])=> $(sel).textContent = state.sort.key===k ? (state.sort.dir==='asc'?'↑':'↓') : '⇵');
+  }
+
+  // ---------------------- Drawer ----------------------
+  let currentId = null;
+  function openDrawer(id){
+    currentId = id; const c = state.clients.find(x=>x.id===id); if(!c) return;
+    $('#drawer').classList.add('open');
+    $('#drawerName').textContent = displayName(c.name);
+    $('#drawerEmail').textContent = displayEmail(c.email);
+    $('#drawerId').textContent = c.id;
+    $('#drawerCase').textContent = c.caseType;
+    $('#drawerStatus').innerHTML = statusOptions(c.status);
+    $('#drawer2fa').checked = !!c.twoFA;
+    $('#drawerNotes').value = c.notes || '';
+
+    renderFiles(c);
+    renderActivity(c);
+  }
+  function closeDrawer(){ $('#drawer').classList.remove('open'); currentId=null; }
+  $('#closeDrawer').onclick = closeDrawer;
+
+  function renderFiles(c){
+    const wrap = $('#files'); wrap.innerHTML='';
+    if(!c.files.length){ wrap.innerHTML = '<div class="small muted">No files yet. Upload using the area above.</div>'; return; }
+    for(const f of c.files){
+      const el = document.createElement('div'); el.className='file'; el.innerHTML = `
+        <div class="blob" aria-hidden="true"></div>
+        <div>
+          <div style="font-weight:600">${f.name}</div>
+          <div class="small muted">${(f.size/1024).toFixed(1)} KB • ${f.type} • ${fmtDate(f.uploadedAt)}</div>
+        </div>
+        <div class="row">
+          <button class="btn secondary small" data-id="${f.id}">Download</button>
+          <button class="btn secondary small danger delFile" data-id="${f.id}">Delete</button>
+        </div>`;
+      wrap.appendChild(el);
+    }
+    $$('.delFile', wrap).forEach(b=> b.onclick = ()=> deleteFile(c.id, b.getAttribute('data-id')));
+    $$('.file .btn.secondary.small', wrap).forEach(b=> b.onclick = ()=> downloadFile(c.id, b.getAttribute('data-id')));
+  }
+
+  function renderActivity(c){
+    const wrap = $('#activity'); wrap.innerHTML='';
+    for(const a of c.activity){
+      const el = document.createElement('div'); el.className='file'; el.innerHTML = `
+        <div class="blob" style="background:linear-gradient(135deg,#22c55e,#10b981)" aria-hidden="true"></div>
+        <div>
+          <div style="font-weight:600">${a.text}</div>
+          <div class="small muted">${fmtDate(a.ts)}</div>
+        </div>`;
+      wrap.appendChild(el);
+    }
+  }
+
+  // Upload handling
+  const drop = $('#drop');
+  const fileInput = $('#fileInput');
+  ;['dragenter','dragover'].forEach(evt=> drop.addEventListener(evt, e=>{e.preventDefault(); drop.classList.add('drag')}));
+  ;['dragleave','drop'].forEach(evt=> drop.addEventListener(evt, e=>{e.preventDefault(); drop.classList.remove('drag')}));
+  drop.addEventListener('drop', e=> handleFiles(e.dataTransfer.files));
+  fileInput.addEventListener('change', e=> handleFiles(e.target.files));
+
+  function handleFiles(list){
+    if(!currentId) return; const c = state.clients.find(x=>x.id===currentId);
+    const arr = Array.from(list);
+    const tasks = arr.map(file=> new Promise(res=>{
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        // Store base64 if <1.5MB, else only metadata
+        const base64 = file.size <= 1_500_000 ? reader.result : null;
+        c.files.unshift({ id: uid(), name:file.name, size:file.size, type:file.type, uploadedAt: Date.now(), uploadedBy:'admin', data: base64 });
+        res();
+      };
+      reader.onerror = ()=>{ c.files.unshift({ id: uid(), name:file.name, size:file.size, type:file.type, uploadedAt: Date.now(), uploadedBy:'admin', data: null }); res(); };
+      reader.readAsDataURL(file);
+    }));
+    Promise.all(tasks).then(()=>{
+      c.updatedAt = Date.now();
+      c.activity.unshift({ts:c.updatedAt, text:`Uploaded ${arr.length} file(s)`});
+      save(); renderFiles(c); render(); toast('Upload complete');
+    });
+  }
+  function deleteFile(clientId, fileId){
+    const c = state.clients.find(x=>x.id===clientId); if(!c) return;
+    c.files = c.files.filter(f=>f.id!==fileId); c.updatedAt=Date.now();
+    c.activity.unshift({ts:c.updatedAt, text:`Deleted a file`});
+    save(); renderFiles(c); render(); toast('File deleted');
+  }
+  function downloadFile(clientId, fileId){
+    const c = state.clients.find(x=>x.id===clientId); const f = c?.files.find(f=>f.id===fileId); if(!f) return;
+    if(!f.data){ toast('This prototype stored metadata only for this file.'); return; }
+    const a = document.createElement('a'); a.href=f.data; a.download=f.name; a.click();
+  }
+
+  // Update from drawer
+  $('#drawerStatus').addEventListener('change', ()=>{
+    const c = state.clients.find(x=>x.id===currentId); if(!c) return;
+    c.status = $('#drawerStatus').value; c.updatedAt=Date.now(); c.activity.unshift({ts:c.updatedAt, text:`Status set to ${c.status}`}); save(); render(); toast('Status updated');
+  });
+  $('#drawer2fa').addEventListener('change', ()=>{
+    const c = state.clients.find(x=>x.id===currentId); if(!c) return;
+    c.twoFA = $('#drawer2fa').checked; c.updatedAt=Date.now(); c.activity.unshift({ts:c.updatedAt, text:`2FA ${c.twoFA?'enabled':'disabled'}`}); save(); render(); toast('2FA setting saved');
+  });
+  $('#saveNotes').addEventListener('click', ()=>{
+    const c = state.clients.find(x=>x.id===currentId); if(!c) return;
+    c.notes = $('#drawerNotes').value; c.updatedAt=Date.now(); c.activity.unshift({ts:c.updatedAt, text:`Notes updated`}); save(); render(); toast('Notes saved');
+  });
+  $('#deleteClient').addEventListener('click', ()=>{
+    const c = state.clients.find(x=>x.id===currentId); if(!c) return;
+    if(confirm(`Delete ${c.name}? This cannot be undone.`)){
+      state.clients = state.clients.filter(x=>x.id!==c.id); save(); closeDrawer(); render(); toast('Client deleted');
+    }
+  });
+
+  // ---------------------- Toolbar interactions ----------------------
+  $('#btnGdpr').onclick = ()=>{ state.gdpr = !state.gdpr; save(); render(); toast(`GDPR mode ${state.gdpr?'enabled':'disabled'}`) };
+  $('#rowsPerPage').onchange = ()=>{ state.rows = Number($('#rowsPerPage').value); state.page=1; save(); render(); }
+  $('#prevPage').onclick = ()=>{ state.page = Math.max(1, state.page-1); render(); }
+  $('#nextPage').onclick = ()=>{ const total = filteredSorted().length; const maxPage = Math.max(1, Math.ceil(total/state.rows)); state.page = Math.min(maxPage, state.page+1); render(); }
+  $('#statusFilter').onchange = ()=>{ state.filterStatus = $('#statusFilter').value || ''; state.page=1; render(); }
+  $('#searchInput').addEventListener('input', debounce(()=>{ state.search = $('#searchInput').value; state.page=1; render(); }, 150));
+  // keyboard: / to focus search, n for new, g toggle gdpr
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='/' && document.activeElement!==$('#searchInput')){ e.preventDefault(); $('#searchInput').focus(); }
+    if(e.key.toLowerCase()==='n'){ $('#btnNew').click(); }
+    if(e.key.toLowerCase()==='g'){ $('#btnGdpr').click(); }
+  });
+
+  // Export CSV
+  $('#btnExport').onclick = ()=>{
+    const rows = filteredSorted();
+    const headers = ['id','name','email','caseType','status','twoFA','files','updatedAt'];
+    const lines = [headers.join(',')].concat(rows.map(c=>[
+      c.id, `"${c.name}"`, c.email, c.caseType, c.status, c.twoFA, c.files.length, new Date(c.updatedAt).toISOString()
+    ].join(',')));
+    const blob = new Blob([lines.join('\n')], {type:'text/csv'});
+    const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='clients.csv'; a.click(); URL.revokeObjectURL(url);
+  }
+
+  // New Client modal
+  const modalNew = $('#modalNew');
+  const openModalNew = ()=> modalNew.classList.add('open');
+  const closeModalNew = ()=> modalNew.classList.remove('open');
+  $('#btnNew').onclick = openModalNew; $('#closeModalNew').onclick = closeModalNew; $('#cancelNew').onclick = closeModalNew;
+  $('#createNew').onclick = ()=>{
+    const name=$('#newName').value.trim(); const email=$('#newEmail').value.trim(); const caseType=$('#newCase').value; const status=$('#newStatus').value; const twoFA=$('#new2fa').checked;
+    if(!name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ toast('Please enter a valid name and email.'); return; }
+    const item = { id:'CL-'+(Math.random()*1e6|0), name, email, caseType, status, twoFA, files:[], updatedAt:Date.now(), createdAt:Date.now(), notes:'', activity:[{ts:Date.now(), text:'Client created'}] };
+    state.clients.unshift(item); save(); render(); closeModalNew(); toast('Client created');
+    // reset form
+    $('#newName').value=''; $('#newEmail').value=''; $('#newCase').selectedIndex=0; $('#newStatus').selectedIndex=0; $('#new2fa').checked=false;
+  };
+
+  // ---------------------- Init ----------------------
+  load();
+  render();
+
+  // Expose for testing in console
+  window.__admin = {state, reset};
+})();
+</script>
+</body>
+</html>
