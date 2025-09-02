@@ -5,79 +5,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MICHIKO — Immigration Support in Hungary</title>
 <meta name="description" content="Helping individuals and companies navigate Hungarian immigration and government procedures with confidence." />
-<!-- Minimal dark Hungary theme -->
+<!-- Dark blue + Hungary theme -->
 <style>
   :root{
-    --bg:#000; --card:#0b0b0b; --ink:#c9ffd2; --muted:#8ad9a4;
-    --accent:#c8102e;  /* red */
-    --accent2:#0f0;    /* green text accent */
-    --line:#171717;
+    --bg:#0b1220;           /* dark navy background */
+    --surface:#101a2b;      /* cards/panels */
+    --surface-2:#0d1728;    /* header/footer */
+    --border:#1e2a44;       /* outlines */
+    --muted:#8aa0c6;        /* secondary text */
+    --text:#dbe7ff;         /* main text */
+    --accent:#2d6cdf;       /* blue */
+    --accent-2:#22b07d;     /* green */
+    --danger:#ef4444;       /* red */
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+    --radius:18px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:var(--ink);text-decoration:none}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  a{color:var(--text);text-decoration:none}
   a:hover{color:var(--accent)}
   img{max-width:100%;display:block}
 
   /* Header */
-  header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+  header{position:sticky;top:0;z-index:20;background:var(--surface-2);border-bottom:1px solid var(--border);backdrop-filter:blur(6px);box-shadow:var(--shadow)}
   .bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;gap:12px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
-  .brand i{width:18px;height:18px;border-radius:4px;background:linear-gradient(#0b0b0b,#050505);outline:1px solid #1f1f1f}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;font-size:20px}
   nav a{margin:0 10px}
   .lang{display:flex;gap:10px;align-items:center}
-  .pill{padding:8px 12px;border:1px solid #222;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
-  .pill.cta{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
-  .pill.ghost:hover{border-color:var(--accent);color:var(--accent)}
-  .kbd{font-family:ui-monospace,Menlo,monospace;border:1px solid #333;border-radius:6px;padding:2px 6px;color:#ddd}
-
-  /* Search palette */
-  .palette{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;background:rgba(0,0,0,.6);z-index:50}
-  .palette.open{display:flex}
-  .palette .panel{margin-top:10vh;width:min(720px,92%);background:#0a0a0a;border:1px solid #242424;border-radius:12px;overflow:hidden}
-  .palette input{width:100%;background:#0e0e0e;border:0;border-bottom:1px solid #1e1e1e;color:#fff;padding:14px}
-  .palette .results{max-height:50vh;overflow:auto}
-  .palette .row{padding:12px 14px;border-bottom:1px solid #131313}
-  .palette .row b{color:var(--accent2)}
+  .pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:transparent;color:var(--text);cursor:pointer;transition:0.3s}
+  .pill:hover{border-color:var(--accent);color:var(--accent)}
+  .pill.cta{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+  .pill.success{background:var(--accent-2);border-color:var(--accent-2);color:#001c12;font-weight:700}
+  .pill.danger{background:var(--danger);border-color:var(--danger);color:#fff;font-weight:700}
 
   /* Hero */
-  .hero{position:relative;min-height:64vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+  .hero{position:relative;min-height:80vh;display:grid;place-items:center;text-align:center;overflow:hidden}
   .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
   .slide.active{opacity:1}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.88))}
-  .hero .inner{position:relative;z-index:1;max-width:860px;padding:18px;background:rgba(0,0,0,.45);border:1px solid #1b1b1b;border-radius:12px}
-  .hero h1{margin:.3rem 0 .6rem;font-size:clamp(28px,4vw,44px)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,18,32,.6),rgba(11,18,32,.95))}
+  .hero .inner{position:relative;z-index:1;max-width:860px;padding:20px;background:rgba(16,26,43,.6);border:1px solid var(--border);border-radius:var(--radius)}
+  .hero h1{margin:.3rem 0 .6rem;font-size:clamp(32px,5vw,50px);color:var(--accent)}
   .muted{color:var(--muted)}
   .controls{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;z-index:2}
-  .btn-round{background:rgba(0,0,0,.55);border:1px solid #2a2a2a;border-radius:50%;color:#fff;font-size:26px;line-height:1;padding:6px 12px;cursor:pointer}
+  .btn-round{background:rgba(0,0,0,.55);border:1px solid var(--border);border-radius:50%;color:#fff;font-size:26px;line-height:1;padding:6px 12px;cursor:pointer}
   .btn-round:hover{color:var(--accent);border-color:var(--accent)}
 
+  /* Sections */
   main{max-width:1100px;margin:auto;padding:36px 16px}
   h2{color:var(--accent);margin:0 0 12px}
   .sub{margin:0 0 20px;color:var(--muted)}
-  .section{padding:34px 0;border-top:1px solid #111}
+  .section{padding:34px 0;border-top:1px solid var(--border)}
 
-  /* Info cards / services */
+  /* Cards */
   .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-  .card{grid-column:span 12;background:var(--card);border:1px solid #1a1a1a;border-radius:12px;padding:16px}
-  @media (min-width:900px){
-    .col-6{grid-column:span 6}
-    .col-4{grid-column:span 4}
-  }
-  .card h3{margin:.2rem 0 .6rem;color:var(--accent2)}
-  .list{margin:8px 0 0 0;padding-left:18px}
+  .card{grid-column:span 12;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+  @media(min-width:900px){.col-6{grid-column:span 6} .col-4{grid-column:span 4}}
+  .card h3{margin:.2rem 0 .6rem;color:var(--accent-2)}
+  .list{margin:8px 0 0 18px}
   .list li{margin:6px 0}
-  .link{display:inline-block;margin-top:8px;color:var(--accent2);border-bottom:1px dashed var(--accent2)}
+  .link{display:inline-block;margin-top:8px;color:var(--accent-2);border-bottom:1px dashed var(--accent-2)}
+  .link:hover{color:var(--accent);border-color:var(--accent)}
 
-  /* Contact */
-  .grid-2{display:grid;grid-template-columns:1fr;gap:14px}
-  @media (min-width:900px){ .grid-2{grid-template-columns:1fr 1fr} }
-  label{font-weight:600}
-  input,textarea{width:100%;background:#0e0e0e;border:1px solid #262626;border-radius:10px;padding:10px 12px;color:#fff;outline:none}
-  input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,16,46,.25)}
-  textarea{min-height:120px;resize:vertical}
-
-  footer{padding:22px 16px;border-top:1px solid #111;color:#8aa090;text-align:center}
+  footer{padding:22px 16px;border-top:1px solid var(--border);color:var(--muted);text-align:center}
 </style>
 </head>
 <body>
@@ -85,32 +74,22 @@
 <header>
   <div class="bar">
     <div class="brand"><i aria-hidden="true"></i><span>MICHIKO</span></div>
-
     <nav aria-label="Main">
-      <a href="#home">Home</a>
-      <a href="#about">About Us</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-      <a id="openSearch" class="pill ghost" href="#">Search <span class="kbd">⌘/Ctrl+K</span></a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
     </nav>
-
     <div class="lang" aria-label="Language">
       <a href="#" class="pill ghost" data-lang="EN">EN</a>
       <a href="#" class="pill ghost" data-lang="HU">HU</a>
       <a href="#" class="pill ghost" data-lang="JA">JA</a>
-      <a class="pill cta" href="#contact">Get Help</a>
+      <a class="pill cta" href="contact.html">Get Help</a>
     </div>
   </div>
 </header>
 
-<!-- Search palette -->
-<div id="palette" class="palette" role="dialog" aria-modal="true">
-  <div class="panel">
-    <input id="q" placeholder="Search site (services, contact, visa…)" />
-    <div id="results" class="results"></div>
-  </div>
-</div>
-
+<!-- Hero -->
 <section id="home" class="hero" aria-label="Hero">
   <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1920&auto=format&fit=crop');"></div>
   <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1920&auto=format&fit=crop');"></div>
@@ -122,125 +101,20 @@
   </div>
 
   <div class="inner">
-    <h1>Trusted Immigration Support in Hungary</h1>
-    <p class="muted">Helping individuals and companies navigate Hungarian immigration and government procedures with confidence.</p>
+    <h1>MICHIKO Immigration Services</h1>
+    <p class="muted">Supporting foreigners, students, and companies in Hungary with visas, permits, and official paperwork.</p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px">
-      <a class="pill cta" href="#contact">Get Started</a>
-      <a class="pill ghost" href="#services">See Services</a>
+      <a class="pill cta" href="contact.html">Get Started</a>
+      <a class="pill success" href="services.html">See Services</a>
+      <a class="pill danger" href="about.html">Learn More</a>
     </div>
   </div>
 </section>
 
 <main>
-  <!-- About -->
-  <section id="about" class="section">
-    <h2>About MICHIKO</h2>
-    <p class="sub">Our multilingual team supports residence and work permits, company paperwork, and official procedures—clearly, securely, and on time.</p>
-    <div class="grid">
-      <article class="card col-6">
-        <h3>What clients value</h3>
-        <ul class="list">
-          <li>Clear guidance and transparent steps</li>
-          <li>Multilingual support (English, Hungarian, Japanese)</li>
-          <li>Secure handling of documents (GDPR-friendly)</li>
-        </ul>
-      </article>
-      <figure class="card col-6" aria-label="Budapest skyline">
-        <img alt="Budapest night skyline" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=1200&auto=format&fit=crop" />
-      </figure>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="section">
-    <h2>Services</h2>
-    <p class="sub">Support for individuals and companies. Simple, reliable, and compliant.</p>
-
-    <div class="grid">
-      <article class="card col-6">
-        <h3>For Individuals</h3>
-        <p>Residence &amp; work permits, family reunification, renewals, and appointments.</p>
-        <a class="link" href="#contact">Learn more →</a>
-        <ul class="list">
-          <li>Residence permit (new / renewal)</li>
-          <li>Work permit application</li>
-          <li>Family reunification</li>
-          <li>Address card &amp; registration</li>
-          <li>Authority appointment booking</li>
-        </ul>
-      </article>
-
-      <article class="card col-6">
-        <h3>For Students</h3>
-        <p>Study in Hungary, student visas, extensions, and official paperwork.</p>
-        <a class="link" href="#contact">Learn more →</a>
-        <ul class="list">
-          <li>Student visa application</li>
-          <li>Residence permit for studies (new / extension)</li>
-          <li>Bank, insurance, university letters</li>
-          <li>Translations &amp; document prep</li>
-        </ul>
-      </article>
-
-      <article class="card col-6">
-        <h3>For Companies</h3>
-        <p>Company registration, employee immigration support, translation &amp; filing.</p>
-        <a class="link" href="#contact">Learn more →</a>
-        <ul class="list">
-          <li>Work permit &amp; residence for employees</li>
-          <li>Company registration paperwork</li>
-          <li>Official translations &amp; contracts</li>
-          <li>Relocation &amp; onboarding support</li>
-        </ul>
-      </article>
-
-      <article class="card col-6">
-        <h3>Additional Support</h3>
-        <p>Notarization, official appointments, document prep, and guidance.</p>
-        <a class="link" href="#contact">Learn more →</a>
-        <ul class="list">
-          <li>Visit visa (short stay)</li>
-          <li>Notarization</li>
-          <li>Official appointments</li>
-          <li>Document preparation</li>
-          <li>General guidance / consulting</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p class="sub">Send us a message and our team will get back to you.</p>
-    <div class="grid-2">
-      <form class="card" onsubmit="event.preventDefault(); alert('Thanks! We will reply shortly.'); this.reset();">
-        <div>
-          <label for="name">Full name</label>
-          <input id="name" name="name" required placeholder="Your name">
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required placeholder="you@email.com">
-        </div>
-        <div>
-          <label for="phone">Phone</label>
-          <input id="phone" name="phone" placeholder="+36 …">
-        </div>
-        <div>
-          <label for="msg">Message</label>
-          <textarea id="msg" name="message" required placeholder="How can we help?"></textarea>
-        </div>
-        <div><button class="pill cta" type="submit">Send</button></div>
-      </form>
-      <aside class="card">
-        <p><strong>MICHIKO</strong><br>Budapest, Hungary</p>
-        <p>Email: <a href="mailto:hello@michiko.hu">hello@michiko.hu</a><br>
-           Phone: <a href="tel:+36">+36 …</a></p>
-        <div style="height:180px;border:1px solid #1a1a1a;border-radius:10px;display:grid;place-items:center;color:#8aa090">Map placeholder</div>
-        <p style="margin-top:10px;font-size:.95rem;color:#8aa090">GDPR notice: data handled in EU, secure by design.</p>
-      </aside>
-    </div>
+  <section class="section">
+    <h2>Welcome to MICHIKO</h2>
+    <p class="sub">We make life easier for foreigners in Hungary by helping with all official documents, immigration services, and government procedures.</p>
   </section>
 </main>
 
@@ -258,33 +132,11 @@
   document.getElementById('prev').onclick = () => show((s-1+slides.length)%slides.length);
   setInterval(()=>document.getElementById('next').click(), 5000);
 
-  // Command palette (⌘/Ctrl+K)
-  const pal = document.getElementById('palette'), q = document.getElementById('q'), res = document.getElementById('results');
-  const index = [
-    {t:'Services — Individuals', href:'#services'},
-    {t:'Services — Students', href:'#services'},
-    {t:'Services — Companies', href:'#services'},
-    {t:'Contact form', href:'#contact'},
-    {t:'About Michiko', href:'#about'}
-  ];
-  function openPal(){ pal.classList.add('open'); q.value=''; render(''); setTimeout(()=>q.focus(),0); }
-  function closePal(){ pal.classList.remove('open'); }
-  function render(term){
-    const v = term.toLowerCase();
-    res.innerHTML = index.filter(i=>i.t.toLowerCase().includes(v)).map(i=>`<div class="row"><a href="${i.href}" onclick="document.getElementById('palette').classList.remove('open')"><b>${i.t}</b></a></div>`).join('');
-  }
-  document.getElementById('openSearch').onclick = (e)=>{ e.preventDefault(); openPal(); };
-  q.oninput = (e)=>render(e.target.value);
-  pal.onclick = (e)=>{ if(e.target===pal) closePal(); };
-  window.addEventListener('keydown', (e)=>{
-    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); pal.classList.contains('open')?closePal():openPal(); }
-    if(e.key==='Escape') closePal();
-  });
-
   // Language toggles (placeholder)
   document.querySelectorAll('[data-lang]').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{ e.preventDefault(); alert('Language switcher placeholder: '+btn.dataset.lang); });
+    btn.addEventListener('click',(e)=>{e.preventDefault();alert('Language switcher: '+btn.dataset.lang);});
   });
 </script>
+
 </body>
 </html>
