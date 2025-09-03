@@ -3,64 +3,180 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About — MICHIKO</title>
-<meta name="description" content="About Michiko: background, approach, and what clients value." />
+<title>About Us — MICHIKO Immigration Services</title>
+<meta name="description" content="Learn about MICHIKO Immigration Services — our story, values, and team supporting immigration in Hungary." />
+
 <style>
-  :root{--bg:#000;--card:#0b0b0b;--ink:#c9ffd2;--muted:#8ad9a4;--accent:#c8102e;--accent2:#0f0;--line:#171717}
-  *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:var(--ink);text-decoration:none} a:hover{color:var(--accent)}
-  header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);border-bottom:1px solid var(--line)}
-  .bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
-  nav a{margin:0 10px} .pill{padding:8px 12px;border:1px solid #222;border-radius:999px} .pill.cta{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
-  main{max-width:1100px;margin:auto;padding:36px 16px}
-  h1{color:var(--accent)} .grid{display:grid;grid-template-columns:1fr;gap:14px}
-  @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-  .card{background:var(--card);border:1px solid #1a1a1a;border-radius:12px;padding:16px}
-  footer{padding:22px 16px;border-top:1px solid #111;color:#8aa090;text-align:center}
+  :root{
+    --bg:#0b1220; --surface:#101a2b; --surface-2:#0d1728; --border:#1e2a44;
+    --muted:#8aa0c6; --text:#dbe7ff; --accent:#2d6cdf; --accent-2:#22b07d;
+    --shadow:0 10px 30px rgba(0,0,0,.25); --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{color:#fff}
+  img{max-width:100%;display:block;border-radius:12px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:20;background:var(--surface-2);border-bottom:1px solid var(--border);backdrop-filter:blur(6px)}
+  .bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+  .brand{font-weight:800;font-size:1.2rem}
+  nav a{margin:0 10px}
+  .pill{padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:transparent;color:var(--text);cursor:pointer}
+  .pill:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* Smaller Get Help button in header */
+  header .pill.cta{
+    background:#4d8dff;
+    border-color:#4d8dff;
+    color:#fff;
+    font-weight:600;
+    font-size:.85rem;
+    padding:6px 12px;
+    border-radius:8px;
+    transition:.2s;
+  }
+  header .pill.cta:hover{
+    background:#72a6ff;
+    border-color:#72a6ff;
+    box-shadow:0 0 6px rgba(77,141,255,.6);
+  }
+
+  /* Hero */
+  .hero{background:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+        position:relative;text-align:center;color:#fff;min-height:60vh;display:grid;place-items:center;padding:40px 16px}
+  .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+  .hero .inner{position:relative;z-index:1;max-width:760px}
+  .hero h1{font-size:clamp(28px,5vw,48px);margin:0 0 12px}
+  .hero span{color:#ffd32d}
+  .hero p{color:#e0e6ff;margin-bottom:20px}
+  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* Buttons */
+  .btn{display:inline-block;padding:12px 18px;border-radius:999px;font-weight:700;border:0;cursor:pointer;transition:.2s}
+  .btn.yellow{background:#ffdb4d;color:#000}
+  .btn.yellow:hover{background:#ffe680;box-shadow:0 0 8px rgba(255,219,77,.6)}
+  .btn.outline{background:transparent;border:2px solid #4d8dff;color:#4d8dff}
+  .btn.outline:hover{background:#4d8dff;color:#fff;box-shadow:0 0 10px rgba(77,141,255,.6)}
+
+  main{max-width:1100px;margin:auto;padding:40px 16px}
+  h2{color:var(--accent);margin:0 0 14px}
+  .sub{color:var(--muted);margin:0 0 20px}
+
+  .grid{display:grid;gap:20px}
+  @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+  @media(min-width:900px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+  .value{text-align:center}
+  .value h3{margin:10px 0 8px}
+  .stat{font-size:1.4rem;font-weight:700;color:var(--accent-2)}
+
+  .team{text-align:center}
+  .team img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px}
+  .team h3{margin:8px 0 4px}
+  .tag{display:inline-block;background:var(--surface-2);border:1px solid var(--border);padding:4px 10px;border-radius:999px;font-size:.85rem;margin:4px}
+
+  /* Call to Action */
+  .cta{background:var(--accent);color:#fff;text-align:center;padding:40px 16px;border-radius:var(--radius);margin-top:40px}
+  .cta h2{color:#fff;margin-bottom:12px}
+  .cta p{color:#dce6ff}
+  .cta .buttons{margin-top:18px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 </style>
 </head>
 <body>
+
 <header>
   <div class="bar">
-    <div class="brand" style="font-weight:800">MICHIKO</div>
+    <div class="brand">MICHIKO</div>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="services.html">Services</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a class="pill cta" href="contact.html">Get Help</a>
+    <a class="pill cta" href="schedule.html">Get Help</a>
   </div>
 </header>
 
-<main>
-  <h1>About MICHIKO</h1>
-  <p class="sub" style="color:#8ad9a4">We guide individuals and companies through Hungary’s immigration and government processes.</p>
-
-  <div class="grid">
-    <section class="card">
-      <h2 style="color:#0f0;margin-top:0">Our Approach</h2>
-      <p>Clear steps, secure data handling, and proactive communication. Multilingual support in English, Hungarian, and Japanese.</p>
-      <ul>
-        <li>Transparent timelines and document checklists</li>
-        <li>GDPR-aware storage and handling</li>
-        <li>Dedicated case coordination</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2 style="color:#0f0;margin-top:0">Team & Languages</h2>
-      <p>Experienced consultants familiar with official procedures and local requirements.</p>
-      <ul>
-        <li>English (EN)</li>
-        <li>Hungarian (HU)</li>
-        <li>Japanese (JA)</li>
-      </ul>
-    </section>
+<section class="hero">
+  <div class="inner">
+    <h1>Your Journey to a New Life <span>Starts Here</span></h1>
+    <p>For over 15 years, we’ve helped thousands of families navigate their immigration journey with compassion, expertise, and dedication to success.</p>
+    <div class="actions">
+      <a href="schedule.html" class="btn yellow">Schedule Consultation</a>
+      <a href="#story" class="btn outline">Learn More</a>
+    </div>
   </div>
+</section>
+
+<main>
+  <!-- Our Story -->
+  <section id="story" class="grid grid-2" style="align-items:center;margin-bottom:40px">
+    <div>
+      <h2>Our Story: Built on Compassion</h2>
+      <p class="sub">Founded in 2008 by immigrants who understood challenges firsthand, MICHIKO Immigration Services was born from a simple belief: everyone deserves a chance at a better life.</p>
+      <p>What started as helping a few families in our community has grown into one of the most trusted immigration support providers in Hungary. We’ve successfully helped thousands of individuals and families navigate complex immigration processes.</p>
+      <p>Our founder, <strong>Michiko</strong>, arrived with determination and built a team of dedicated professionals who share her passion for making the impossible possible.</p>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:16px">
+        <div class="stat">5,000+<br><span class="sub">Families Served</span></div>
+        <div class="stat">98%<br><span class="sub">Success Rate</span></div>
+        <div class="stat">15+<br><span class="sub">Years Experience</span></div>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=1200&auto=format&fit=crop" alt="Happy families with documents" />
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section>
+    <h2>Our Values</h2>
+    <div class="grid grid-4">
+      <div class="card value">
+        <div>❤️</div>
+        <h3>Compassion First</h3>
+        <p>Every case has a human story. We approach each with empathy and care.</p>
+      </div>
+      <div class="card value">
+        <div>🛡️</div>
+        <h3>Integrity & Trust</h3>
+        <p>Honest assessments and transparent communication at every step.</p>
+      </div>
+      <div class="card value">
+        <div>🤝</div>
+        <h3>Community Focus</h3>
+        <p>Giving back to the communities that welcome and support immigrants.</p>
+      </div>
+      <div class="card value">
+        <div>🏆</div>
+        <h3>Excellence in Service</h3>
+        <p>Proven success and commitment to the best outcomes for our clients.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Call to Action -->
+  <section class="cta">
+    <h2>Ready to Start Your Journey?</h2>
+    <p>Don’t navigate the immigration process alone. Let our experienced team guide you with personalized support and proven results.</p>
+    <div class="buttons">
+      <a href="schedule.html" class="btn yellow">Schedule Free Consultation</a>
+      <a href="contact.html" class="btn outline">Call Us Today</a>
+    </div>
+    <div style="margin-top:20px;display:flex;justify-content:center;flex-wrap:wrap;gap:20px;font-size:.95rem">
+      <div>📞 (555) 123-4567</div>
+      <div>📧 hello@michiko.hu</div>
+      <div>📍 Budapest, Hungary</div>
+    </div>
+  </section>
 </main>
 
 <footer>© <span id="year"></span> MICHIKO — All rights reserved.</footer>
-<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
