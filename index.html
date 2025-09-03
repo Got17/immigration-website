@@ -1,142 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MICHIKO — Immigration Support in Hungary</title>
-<meta name="description" content="Helping individuals and companies navigate Hungarian immigration and government procedures with confidence." />
-<!-- Dark blue + Hungary theme -->
-<style>
-  :root{
-    --bg:#0b1220;           /* dark navy background */
-    --surface:#101a2b;      /* cards/panels */
-    --surface-2:#0d1728;    /* header/footer */
-    --border:#1e2a44;       /* outlines */
-    --muted:#8aa0c6;        /* secondary text */
-    --text:#dbe7ff;         /* main text */
-    --accent:#2d6cdf;       /* blue */
-    --accent-2:#22b07d;     /* green */
-    --danger:#ef4444;       /* red */
-    --shadow:0 10px 30px rgba(0,0,0,.25);
-    --radius:18px;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  a{color:var(--text);text-decoration:none}
-  a:hover{color:var(--accent)}
-  img{max-width:100%;display:block}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MICHIKO — Immigration Support in Hungary</title>
+  <meta name="description" content="Helping individuals and companies navigate Hungarian immigration and government procedures with confidence." />
+  <style>
+    :root{
+      --bg:#000; --card:#0b0b0b; --ink:#c9ffd2; --muted:#8ad9a4;
+      --accent:#c8102e;        /* red */
+      --accent2:#a6f4c5;       /* softer mint */
+      --line:#171717;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--ink);text-decoration:none} a:hover{color:var(--accent)}
+    img{max-width:100%;display:block}
 
-  /* Header */
-  header{position:sticky;top:0;z-index:20;background:var(--surface-2);border-bottom:1px solid var(--border);backdrop-filter:blur(6px);box-shadow:var(--shadow)}
-  .bar{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;gap:12px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px;font-size:20px}
-  nav a{margin:0 10px}
-  .lang{display:flex;gap:10px;align-items:center}
-  .pill{padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:transparent;color:var(--text);cursor:pointer;transition:0.3s}
-  .pill:hover{border-color:var(--accent);color:var(--accent)}
-  .pill.cta{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
-  .pill.success{background:var(--accent-2);border-color:var(--accent-2);color:#001c12;font-weight:700}
-  .pill.danger{background:var(--danger);border-color:var(--danger);color:#fff;font-weight:700}
+    /* Header */
+    header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+    .bar{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:10px 14px}
+    .brand{font-weight:800;letter-spacing:.2px;justify-self:start}
+    .bar nav{justify-self:center}
+    .actions{justify-self:end}
+    nav a{margin:0 10px}
+    .pill{padding:8px 12px;border:1px solid #222;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+    .pill.cta{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
 
-  /* Hero */
-  .hero{position:relative;min-height:80vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-  .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
-  .slide.active{opacity:1}
-  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,18,32,.6),rgba(11,18,32,.95))}
-  .hero .inner{position:relative;z-index:1;max-width:860px;padding:20px;background:rgba(16,26,43,.6);border:1px solid var(--border);border-radius:var(--radius)}
-  .hero h1{margin:.3rem 0 .6rem;font-size:clamp(32px,5vw,50px);color:var(--accent)}
-  .muted{color:var(--muted)}
-  .controls{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 14px;z-index:2}
-  .btn-round{background:rgba(0,0,0,.55);border:1px solid var(--border);border-radius:50%;color:#fff;font-size:26px;line-height:1;padding:6px 12px;cursor:pointer}
-  .btn-round:hover{color:var(--accent);border-color:var(--accent)}
+    /* Hero */
+    .hero{position:relative;min-height:64vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
+    .slide.active{opacity:1}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.88))}
+    .hero .inner{position:relative;z-index:1;max-width:860px;padding:18px;background:rgba(0,0,0,.45);border:1px solid #1b1b1b;border-radius:12px}
+    .hero h1{margin:.3rem 0 .6rem;font-size:clamp(28px,4vw,44px)}
 
-  /* Sections */
-  main{max-width:1100px;margin:auto;padding:36px 16px}
-  h2{color:var(--accent);margin:0 0 12px}
-  .sub{margin:0 0 20px;color:var(--muted)}
-  .section{padding:34px 0;border-top:1px solid var(--border)}
+    /* Layout */
+    main{max-width:1100px;margin:auto;padding:36px 16px}
+    h2{color:var(--accent);margin:0 0 12px;text-align:center}
+    .sub{margin:0 0 20px;color:var(--muted);text-align:center}
+    .section{padding:34px 0;border-top:1px solid #111}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .grid-2{display:grid;grid-template-columns:1fr;gap:14px}
+    @media (min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+    .card{grid-column:span 12;background:var(--card);border:1px solid #1a1a1a;border-radius:12px;padding:16px}
 
-  /* Cards */
-  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-  .card{grid-column:span 12;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
-  @media(min-width:900px){.col-6{grid-column:span 6} .col-4{grid-column:span 4}}
-  .card h3{margin:.2rem 0 .6rem;color:var(--accent-2)}
-  .list{margin:8px 0 0 18px}
-  .list li{margin:6px 0}
-  .link{display:inline-block;margin-top:8px;color:var(--accent-2);border-bottom:1px dashed var(--accent-2)}
-  .link:hover{color:var(--accent);border-color:var(--accent)}
+    /* Buttons */
+    .btn-red{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);border:1px solid var(--accent);color:#fff;font-weight:700}
+    .btn-red:hover{filter:brightness(.92)}
+    .btn-outline{display:inline-block;padding:10px 16px;border-radius:10px;border:1px solid #2b2b2b;color:var(--ink)}
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-wide{display:inline-block;width:220px;text-align:center}
 
-  footer{padding:22px 16px;border-top:1px solid var(--border);color:var(--muted);text-align:center}
-</style>
+    /* About */
+    .eyebrow{color:#c15;letter-spacing:.12em;text-transform:uppercase;font-weight:700;font-size:.85rem;text-align:center}
+    .about-copy{color:var(--ink);opacity:.95}
+    .about-feats{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+    @media (min-width:900px){ .about-feats{grid-template-columns:repeat(4,1fr)} }
+    .feat{background:#0c0c0c;border:1px solid #1c1c1c;border-radius:12px;padding:16px;text-align:center}
+    .feat img{width:40px;margin-bottom:6px}
+    .feat h4{margin:.2rem 0;color:var(--accent2)}
+    .feat p{margin:0;color:var(--muted);font-size:.95rem}
+
+    /* Services (image + text rows) */
+    .services-wrap{display:grid;gap:20px}
+    .service-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--card);align-items:center}
+    .service-row:nth-child(even){direction:rtl}
+    .service-row:nth-child(even) .service-text{direction:ltr}
+    .service-text h3{margin:0 0 8px;color:var(--accent2)}
+    .service-text p{color:var(--muted);margin:0 0 12px}
+    .service-img img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+    @media (max-width:900px){.service-row{grid-template-columns:1fr}.service-row:nth-child(even){direction:ltr}}
+
+    /* Contact */
+    .contact-wrap{display:grid;gap:18px;grid-template-columns:1fr}
+    @media (min-width:960px){ .contact-wrap{grid-template-columns:420px 1fr} }
+    .office{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+    .office h3{margin:.2rem 0 1rem;color:var(--ink)}
+    .office .row{display:flex;gap:12px;align-items:flex-start;margin:12px 0;color:var(--muted)}
+    .office .icon{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;background:#0f0f0f;border:1px solid #1d1d1d}
+    .form{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+    .grid-2-sm{display:grid;gap:12px;grid-template-columns:1fr}
+    @media (min-width:760px){ .grid-2-sm{grid-template-columns:1fr 1fr} }
+    label{display:block;font-weight:600;margin:8px 0 6px}
+    input,textarea{width:100%;background:#0e0e0e;color:#fff;border:1px solid #262626;border-radius:10px;padding:10px 12px;outline:0}
+    input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,16,46,.25)}
+    textarea{min-height:140px;resize:vertical}
+    .hint{font-size:.85rem;color:var(--muted);margin-top:6px}
+
+    /* Footer */
+    .footer{border-top:1px solid #111;padding:28px 16px;color:#8aa090;background:#060606}
+    .footer .cols{max-width:1100px;margin:auto;display:grid;gap:20px;grid-template-columns:1fr}
+    @media (min-width:900px){.footer .cols{grid-template-columns:2fr 1fr 1fr 1fr}}
+    .footer h4{margin:0 0 10px;color:var(--ink)}
+    .footer a{color:#a6f4c5} .footer a:hover{color:var(--accent)}
+    .mini{font-size:.9rem;color:#869a90}
+  </style>
 </head>
 <body>
 
 <header>
   <div class="bar">
-    <div class="brand"><i aria-hidden="true"></i><span>MICHIKO</span></div>
+    <div class="brand">MICHIKO</div>
     <nav aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div class="lang" aria-label="Language">
-      <a href="#" class="pill ghost" data-lang="EN">EN</a>
-      <a href="#" class="pill ghost" data-lang="HU">HU</a>
-      <a href="#" class="pill ghost" data-lang="JA">JA</a>
-      <a class="pill cta" href="contact.html">Get Help</a>
+    <div class="actions">
+      <a class="pill cta" href="#contact">Get Help</a>
     </div>
   </div>
 </header>
 
-<!-- Hero -->
-<section id="home" class="hero" aria-label="Hero">
-  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1920&auto=format&fit=crop');"></div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1920&auto=format&fit=crop');"></div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1920&auto=format&fit=crop');"></div>
-
-  <div class="controls">
-    <button class="btn-round" id="prev" aria-label="Previous slide">❮</button>
-    <button class="btn-round" id="next" aria-label="Next slide">❯</button>
-  </div>
-
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1549640360-10893cb0f8f0?q=80&w=1920');"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1920');"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1920');"></div>
   <div class="inner">
-    <h1>MICHIKO Immigration Services</h1>
-    <p class="muted">Supporting foreigners, students, and companies in Hungary with visas, permits, and official paperwork.</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px">
-      <a class="pill cta" href="contact.html">Get Started</a>
-      <a class="pill success" href="services.html">See Services</a>
-      <a class="pill danger" href="about.html">Learn More</a>
+    <h1>Trusted Immigration Support in Hungary</h1>
+    <p class="muted">Helping individuals and companies navigate Hungarian immigration and government procedures with confidence.</p>
+    <div style="margin-top:10px">
+      <a class="pill cta" href="#contact">Get Started</a>
+      <a class="pill" href="#services">See Services</a>
     </div>
   </div>
 </section>
 
 <main>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="eyebrow">Welcome to Michiko Immigration</div>
+    <h2>About MICHIKO</h2>
+    <div class="grid" style="row-gap:18px">
+      <article class="card col-6 about-copy" style="line-height:1.7">
+        <p>MICHIKO Immigration is a Budapest-based support service that helps foreigners and companies manage <strong>Hungarian immigration and government procedures</strong> with clarity and confidence. Our top priority is understanding each client’s needs and mapping the best, most practical path through transparent communication.</p>
+        <p>We aim to be your trusted partner in Hungary—delivering high-quality, multilingual service and expert guidance. From residence and work permits to student paperwork and company filings, we remove uncertainty and keep every step secure, compliant, and on time.</p>
+
+        <div class="about-feats">
+          <div class="feat">
+            <img src="images/visa-line-icon-vector.jpg" alt="Visa icon"><h4>Permits & Visas</h4><p>Residence, work, study, visit—clear steps and support.</p>
+          </div>
+          <div class="feat">
+            <img src="images/Family Support.jpg" alt="Family icon"><h4>Family Support</h4><p>Family reunification and long-term solutions.</p>
+          </div>
+          <div class="feat">
+            <img src="images/For Companies.jpg" alt="Company icon"><h4>For Companies</h4><p>Employee permits, registration, translations, filings.</p>
+          </div>
+          <div class="feat">
+            <img src="images/Secure & GDPR.jpg" alt="Secure GDPR icon"><h4>Secure & GDPR</h4><p>EU-hosted storage and data handling by design.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;text-align:center">
+          <a href="#services" class="btn-outline">Read More</a>
+        </div>
+      </article>
+
+      <figure class="card col-6" aria-label="Hungarian Parliament">
+        <img src="images/parliament-budapest.jpg" alt="Hungarian Parliament in Budapest">
+        <figcaption style="color:var(--muted);margin-top:8px;text-align:center">Hungarian Parliament in Budapest</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <h2>Our Services</h2>
+    <p class="sub">Support for individuals, students, and companies — simple, reliable, compliant.</p>
+
+    <div class="services-wrap">
+      <div class="service-row">
+        <div class="service-text">
+          <h3>Study in Hungary</h3>
+          <p>Student visas, residence permits for studies, and university paperwork — so you can focus on your education.</p>
+          <a href="#" class="btn-red">Read More</a>
+        </div>
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600" alt="Students in Hungary">
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-text">
+          <h3>Visit Hungary</h3>
+          <p>Short-stay (Schengen) visas, tourist entry, and appointment booking. We make your Budapest trip smooth and stress-free.</p>
+          <a href="#" class="btn-red">Read More</a>
+        </div>
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1543357480-c60d40007a4e?w=1600" alt="Tourists on Chain Bridge, Budapest">
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-text">
+          <h3>Work in Hungary</h3>
+          <p>Work & residence permits, employer sponsorship, renewals, and translations — complete support for starting your career in Hungary.</p>
+          <a href="#" class="btn-red">Read More</a>
+        </div>
+        <div class="service-img">
+          <img src="https://images.unsplash.com/photo-1581092919535-7146a889b1b0?w=1600" alt="Business in Hungary">
+        </div>
+      </div>
+
+      <div class="service-row">
+        <div class="service-text">
+          <h3>Immigrate to Hungary</h3>
+          <p>Family reunification, permanent residence, and long-term relocation. Clear steps and secure document handling throughout.</p>
+          <a href="#" class="btn-red">Read More</a>
+        </div>
+        <div class="service-img">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Parliament_Building_Budapest_2018.jpg" alt="Hungarian Parliament at night">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <section class="section">
-    <h2>Welcome to MICHIKO</h2>
-    <p class="sub">We make life easier for foreigners in Hungary by helping with all official documents, immigration services, and government procedures.</p>
+    <div class="card" style="text-align:center;padding:40px">
+      <h2>Ready to Start Your Journey?</h2>
+      <p>Don’t navigate the immigration process alone. Let our experienced team guide you with personalized support and proven results.</p>
+      <a href="#contact" class="btn-red">Schedule Free Consultation</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" style="scroll-margin-top:80px">
+    <h2>Get in Touch</h2>
+    <p class="sub">Just drop us a line. We’ll be glad to answer your enquiries.</p>
+
+    <div class="contact-wrap">
+      <aside class="office">
+        <h3>Our Office</h3>
+        <div class="row"><div class="icon">📍</div><div>Budapest, V. kerület<br>Hungary</div></div>
+        <div class="row"><div class="icon">✉️</div><div><a href="mailto:hello@michiko.hu">hello@michiko.hu</a></div></div>
+        <div class="row"><div class="icon">📞</div><div><a href="tel:+361234567">+36 1 234 567</a></div></div>
+        <div class="row"><div class="icon">🇭🇺</div><div>EN • HU • JA</div></div>
+      </aside>
+
+      <form class="form" onsubmit="event.preventDefault(); alert('Thanks! We will reply shortly.'); this.reset();">
+        <div class="grid-2-sm">
+          <div><label for="first">First Name*</label><input id="first" name="first" required placeholder="Enter first name"></div>
+          <div><label for="last">Last Name*</label><input id="last" name="last" required placeholder="Enter last name"></div>
+        </div>
+        <div class="grid-2-sm">
+          <div><label for="mobile">Mobile No.*</label><input id="mobile" name="mobile" required placeholder="+36 …"></div>
+          <div><label for="email">Email*</label><input id="email" name="email" type="email" required placeholder="you@email.com"></div>
+        </div>
+        <div style="margin-top:10px">
+          <label for="file">Upload File</label>
+          <input id="file" name="file" type="file" />
+          <div class="hint">You can upload a .zip if you have multiple documents.</div>
+        </div>
+        <div style="margin-top:10px">
+          <label for="msg">Message</label>
+          <textarea id="msg" name="message" placeholder="Write your message"></textarea>
+        </div>
+        <div style="margin-top:16px">
+          <button class="btn-red btn-wide" type="submit">Submit →</button>
+        </div>
+      </form>
+    </div>
   </section>
 </main>
 
-<footer>© <span id="year"></span> MICHIKO — All rights reserved.</footer>
+<footer class="footer">
+  <div class="cols">
+    <div>
+      <div style="font-weight:800;color:var(--ink);margin-bottom:6px">MICHIKO</div>
+      <div class="mini">© <span id="year"></span> MICHIKO — All rights reserved.<br>GDPR notice: data handled in the EU, secure by design.</div>
+    </div>
+    <div>
+      <h4>Useful Links</h4>
+      <div class="mini">
+        <div><a href="#home">Home</a></div>
+        <div><a href="#about">About us</a></div>
+        <div><a href="#services">Services</a></div>
+        <div><a href="#contact">Contact</a></div>
+      </div>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <div class="mini">
+        <div><a href="#services">Study in Hungary</a></div>
+        <div><a href="#services">Visit Hungary</a></div>
+        <div><a href="#services">Work in Hungary</a></div>
+        <div><a href="#services">Immigrate to Hungary</a></div>
+      </div>
+    </div>
+    <div>
+      <h4>Follow us</h4>
+      <div class="mini">
+        <div><a href="#">Facebook</a></div>
+        <div><a href="#">Instagram</a></div>
+        <div><a href="#">LinkedIn</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Simple slider
+  // Simple background slider
   const slides = [...document.querySelectorAll('.slide')];
   let s = 0;
-  const show = i => { slides[s].classList.remove('active'); s = i; slides[s].classList.add('active'); };
-  document.getElementById('next').onclick = () => show((s+1)%slides.length);
-  document.getElementById('prev').onclick = () => show((s-1+slides.length)%slides.length);
-  setInterval(()=>document.getElementById('next').click(), 5000);
-
-  // Language toggles (placeholder)
-  document.querySelectorAll('[data-lang]').forEach(btn=>{
-    btn.addEventListener('click',(e)=>{e.preventDefault();alert('Language switcher: '+btn.dataset.lang);});
-  });
+  const show = (i) => { slides[s].classList.remove('active'); s = i; slides[s].classList.add('active'); };
+  setInterval(() => show((s + 1) % slides.length), 5000);
 </script>
-
 </body>
 </html>
