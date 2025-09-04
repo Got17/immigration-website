@@ -58,7 +58,7 @@
     .about-feats{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
     @media (min-width:900px){ .about-feats{grid-template-columns:repeat(4,1fr)} }
     .feat{background:#0c0c0c;border:1px solid #1c1c1c;border-radius:12px;padding:16px;text-align:center}
-    .feat img{width:40px;margin-bottom:6px}
+    .feat img{width:40px;height:40px;object-fit:contain;margin-bottom:6px}
     .feat h4{margin:.2rem 0;color:var(--accent2)}
     .feat p{margin:0;color:var(--muted);font-size:.95rem}
 
@@ -141,16 +141,31 @@
 
         <div class="about-feats">
           <div class="feat">
-            <img src="images/visa-line-icon-vector.jpg" alt="Visa icon"><h4>Permits & Visas</h4><p>Residence, work, study, visit—clear steps and support.</p>
+            <img src="images/visa-icon.jpg" alt="Visa icon"
+                 onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{textContent:'🪪',style:'font-size:28px;margin:0 auto 6px;'}));">
+            <h4>Permits & Visas</h4>
+            <p>Residence, work, study, visit—clear steps and support.</p>
           </div>
+
           <div class="feat">
-            <img src="images/Family Support.jpg" alt="Family icon"><h4>Family Support</h4><p>Family reunification and long-term solutions.</p>
+            <img src="images/family-support.jpg" alt="Family icon"
+                 onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{textContent:'👨‍👩‍👧‍👦',style:'font-size:28px;margin:0 auto 6px;'}));">
+            <h4>Family Support</h4>
+            <p>Family reunification and long-term solutions.</p>
           </div>
+
           <div class="feat">
-            <img src="images/For Companies.jpg" alt="Company icon"><h4>For Companies</h4><p>Employee permits, registration, translations, filings.</p>
+            <img src="images/for-companies.jpg" alt="Company icon"
+                 onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{textContent:'🏢',style:'font-size:28px;margin:0 auto 6px;'}));">
+            <h4>For Companies</h4>
+            <p>Employee permits, registration, translations, filings.</p>
           </div>
+
           <div class="feat">
-            <img src="images/Secure & GDPR.jpg" alt="Secure GDPR icon"><h4>Secure & GDPR</h4><p>EU-hosted storage and data handling by design.</p>
+            <img src="images/secure-gdpr.jpg" alt="Secure GDPR icon"
+                 onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{textContent:'🔐',style:'font-size:28px;margin:0 auto 6px;'}));">
+            <h4>Secure & GDPR</h4>
+            <p>EU-hosted storage and data handling by design.</p>
           </div>
         </div>
 
@@ -160,8 +175,10 @@
       </article>
 
       <figure class="card col-6" aria-label="Hungarian Parliament">
-        <img src="images/parliament-budapest.jpg" alt="Hungarian Parliament in Budapest">
-        <figcaption style="color:var(--muted);margin-top:8px;text-align:center">Hungarian Parliament in Budapest</figcaption>
+        <img src="images/parliament-budapest.jpg" alt="Hungarian Parliament in Budapest" loading="lazy">
+        <figcaption style="color:var(--muted);margin-top:8px;text-align:center">
+          Hungarian Parliament in Budapest
+        </figcaption>
       </figure>
     </div>
   </section>
