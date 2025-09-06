@@ -1,159 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Us — MICHIKO Immigration</title>
-  <meta name="description" content="About MICHIKO Immigration: Helping individuals and companies navigate Hungarian immigration and government procedures with confidence." />
+  <title>About Us - Hungary Immigration Services</title>
+  <meta name="description" content="Learn about our mission, values, and process. We help foreigners and companies navigate immigration and admin in Hungary with GDPR‑ready security." />
+  <link rel="canonical" href="/about.html" />
   <style>
-    :root{
-      --bg:#000; --card:#0b0b0b; --ink:#c9ffd2; --muted:#8ad9a4;
-      --accent:#c8102e; --accent2:#a6f4c5; --line:#171717;
-    }
+    :root{--bg:#0b1220;--surface:#101a2b;--surface-2:#0d1728;--border:#1e2a44;--muted:#8aa0c6;--text:#dbe7ff;--accent:#2d6cdf;--accent-2:#22b07d;--radius:18px;--max:1200px;--shadow:0 10px 30px rgba(0,0,0,.25)}
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:var(--ink);text-decoration:none} a:hover{color:var(--accent)}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max),92vw);margin:0 auto}
     img{max-width:100%;display:block}
+    header{position:sticky;top:0;z-index:10;background:rgba(13,23,40,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .hbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:12px 0}
+    .brand{display:inline-flex;align-items:center;gap:10px}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6aa1ff)}
+    .brand span{font-weight:700}
+    nav.mainnav{display:flex;gap:16px;justify-content:center}
+    nav.mainnav a{padding:8px 10px;border-radius:10px}
+    nav.mainnav a.active,nav.mainnav a:hover{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));outline:1px solid var(--border)}
+    .actions{display:flex;justify-content:flex-end}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--accent);color:#fff;border:0;box-shadow:var(--shadow)}
+    .btn.secondary{background:transparent;border:1px solid var(--border);box-shadow:none;color:var(--text)}
+    .burger{display:none}
+    .navmenu{display:none}
+    @media (max-width:900px){.hbar{grid-template-columns:auto 1fr auto}nav.mainnav{display:none}.burger{display:inline-flex;background:transparent;border:1px solid var(--border);border-radius:10px;padding:8px;color:var(--text)}.navmenu{display:none;background:var(--surface-2);border-top:1px solid var(--border)}.navmenu.open{display:grid}.navmenu a{padding:12px 16px;border-bottom:1px solid var(--border)}}
 
-    /* Header */
-    header{position:sticky;top:0;z-index:20;background:rgba(0,0,0,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
-    .bar{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:10px 14px}
-    .brand{font-weight:800;letter-spacing:.2px;justify-self:start}
-    .bar nav{justify-self:center}
-    .actions{justify-self:end}
-    nav a{margin:0 10px}
-    .pill{padding:8px 12px;border:1px solid #222;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
-    .pill.cta{background:var(--accent);border-color:var(--accent);color:#000;font-weight:800}
+    .pagehead{padding:0 0 20px;background:radial-gradient(1000px 400px at 50% -10%, rgba(45,108,223,.18), transparent 60%)}
+    .banner{height:320px;border-radius:18px;border:1px solid var(--border);background-size:cover;background-position:center;box-shadow:var(--shadow)}
+    h1{margin:16px 0 6px}
+    .muted{color:var(--muted)}
+    .section{padding:36px 0}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:1000px){.grid{grid-template-columns:1fr}}
+    .values{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:900px){.values{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.values{grid-template-columns:1fr}}
 
-    /* Hero */
-    .hero{position:relative;min-height:40vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
-    .hero .inner{position:relative;z-index:1;max-width:860px;padding:18px}
-    .hero h1{margin:.3rem 0 .6rem;font-size:clamp(28px,4vw,44px)}
-
-    /* Layout */
-    main{max-width:1100px;margin:auto;padding:36px 16px}
-    h2{color:var(--accent);margin:0 0 12px;text-align:center}
-    .section{padding:34px 0;border-top:1px solid #111}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-    .card{grid-column:span 12;background:var(--card);border:1px solid #1a1a1a;border-radius:12px;padding:20px}
-
-    /* Footer */
-    .footer{
-      border-top:1px solid #111;
-      padding:28px 16px;
-      color:#8aa090;
-      background:#060606;
-    }
-    .footer .cols{
-      max-width:1100px;
-      margin:auto;
-      display:grid;
-      gap:20px;
-      grid-template-columns:1fr;
-    }
-    @media (min-width:900px){
-      .footer .cols{grid-template-columns:2fr 1fr 1fr 1fr}
-    }
-    .footer h4{margin:0 0 10px;color:var(--ink)}
-    .footer a{color:#a6f4c5} 
-    .footer a:hover{color:var(--accent)}
-    .mini{font-size:.9rem;color:#869a90}
+    footer{background:var(--surface-2);border-top:1px solid var(--border);padding:20px 0;color:var(--muted)}
+    .footbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}
+    .footlinks{display:flex;gap:14px;flex-wrap:wrap}
   </style>
 </head>
 <body>
-
 <header>
-  <div class="bar">
-    <div class="brand"><img src="images/logo.png" alt="MICHIKO Logo" style="height:28px"></div>
-    <nav aria-label="Main">
+  <div class="container hbar">
+    <a class="brand" href="index.html"><div class="logo" aria-hidden="true"></div><span>Hungary Immigration</span></a>
+    <nav class="mainnav" aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
+      <a href="about.html" class="active">About-us</a>
       <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
+      <a href="contact.html">Contact us</a>
     </nav>
     <div class="actions">
-      <a class="pill cta" href="client-portal.html">Login</a>
+      <a class="btn secondary" href="client-portal.html">Login</a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="navMenu">☰</button>
     </div>
+  </div>
+  <div id="navMenu" class="navmenu container" role="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About-us</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact us</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" style="background-image:url('https://images.unsplash.com/photo-1502920917128-1aa500764b8c?w=1920');background-size:cover;background-position:center;">
-  <div class="inner">
-    <h1>About MICHIKO Immigration</h1>
-    <p class="muted">Helping individuals and companies navigate Hungarian immigration and government procedures with confidence.</p>
-  </div>
-</section>
-
 <main>
-  <!-- ABOUT SECTION -->
-  <section class="section">
-    <div class="card">
-      <h2>About Us</h2>
-      <p>MICHIKO Immigration is a Budapest-based immigration support service dedicated to helping individuals, families, and businesses navigate the often complex Hungarian immigration system. With a team of multilingual experts, we provide clear guidance and efficient solutions tailored to each client’s needs.</p>
-      <p>Our mission is to remove uncertainty and confusion from the immigration process, ensuring that every step is handled with accuracy, transparency, and care. From residence permits and work visas to family reunification and company filings, we make compliance simple and stress-free.</p>
-    </div>
+  <section class="pagehead container">
+    <!-- Banner: Pexels 30992800 Chain Bridge by Goszton -->
+    <div class="banner" role="img" aria-label="Budapest Chain Bridge and skyline at night" style="background-image:url('https://images.pexels.com/photos/30992800/pexels-photo-30992800.jpeg?auto=compress&cs=tinysrgb&w=1400&h=500&fit=crop')"></div>
+    <h1>About Us</h1>
+    <p class="muted">Trusted partner for immigration & business services in Hungary.</p>
+  </section>
 
-    <div class="grid" style="margin-top:20px">
-      <div class="card" style="grid-column:span 6">
-        <h3 style="color:var(--accent2)">Our Mission</h3>
-        <p>We are committed to maintaining integrity and building trust by delivering transparent, professional, and reliable immigration support for individuals and businesses in Hungary.</p>
+  <section class="container section">
+    <div class="grid">
+      <div class="card">
+        <h2>Our Mission</h2>
+        <p class="muted">To simplify Hungarian administration for newcomers and foreign‑owned companies. We focus on transparency, security, and clear guidance so you can focus on living and working in Hungary.</p>
+        <h3>What we do</h3>
+        <ul class="muted" style="line-height:1.7">
+          <li>Residence & work permit advisory, including renewals</li>
+          <li>Student pathways and arrival checklists</li>
+          <li>Company registration (Kft.) coordination with partner attorney</li>
+          <li>Document checklists and templates to reduce back‑and‑forth</li>
+          <li>Secure client portal for file sharing (GDPR‑ready)</li>
+        </ul>
       </div>
-      <div class="card" style="grid-column:span 6">
-        <h3 style="color:var(--accent2)">Our Vision</h3>
-        <p>To be the most trusted partner in Hungary for immigration support services — known for efficiency, transparency, and unwavering commitment to client success.</p>
+      <div class="card">
+        <h2>How we work</h2>
+        <ol class="muted" style="line-height:1.7">
+          <li><strong>Consultation:</strong> Free 15‑min call to map your case and eligibility.</li>
+          <li><strong>Checklist:</strong> You receive a clear list of required documents.</li>
+          <li><strong>Preparation:</strong> We review your materials and prepare forms.</li>
+          <li><strong>Submission:</strong> We guide you through booking and submission steps.</li>
+          <li><strong>Follow‑up:</strong> Regular updates until completion.</li>
+        </ol>
+        <p class="muted">We don’t guarantee outcomes—no one can—but we maximize your chance of success with orderly, complete applications.</p>
       </div>
     </div>
+  </section>
 
-    <div class="card" style="margin-top:20px;text-align:center;padding:30px">
-      <h2>Ready to Start Your Journey?</h2>
-      <p>Let our experienced team help you every step of the way.</p>
-      <a href="contact.html" class="pill cta">Enquire Now →</a>
+  <section class="container section">
+    <div class="values">
+      <div class="card"><h3>Privacy‑First</h3><p class="muted">GDPR‑aligned practices, EU hosting, minimal data collection, and client control over files.</p></div>
+      <div class="card"><h3>Clarity</h3><p class="muted">We prefer checklists, plain language, and proactive communication to avoid surprises.</p></div>
+      <div class="card"><h3>Reliability</h3><p class="muted">We track deadlines and statuses so your case keeps moving—without you having to chase.</p></div>
     </div>
   </section>
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="cols">
-    <div>
-      <div style="font-weight:800;color:var(--ink);margin-bottom:6px">MICHIKO</div>
-      <div class="mini">© <span id="year"></span> MICHIKO — All rights reserved.<br>
-      GDPR notice: data handled in the EU, secure by design.</div>
-    </div>
-    <div>
-      <h4>Useful Links</h4>
-      <div class="mini">
-        <div><a href="index.html">Home</a></div>
-        <div><a href="about.html">About us</a></div>
-        <div><a href="services.html">Services</a></div>
-        <div><a href="contact.html">Contact</a></div>
-      </div>
-    </div>
-    <div>
-      <h4>Services</h4>
-      <div class="mini">
-        <div><a href="services.html">Study in Hungary</a></div>
-        <div><a href="services.html">Visit Hungary</a></div>
-        <div><a href="services.html">Work in Hungary</a></div>
-        <div><a href="services.html">Immigrate to Hungary</a></div>
-      </div>
-    </div>
-    <div>
-      <h4>Follow us</h4>
-      <div class="mini">
-        <div><a href="#">Facebook</a></div>
-        <div><a href="#">Instagram</a></div>
-        <div><a href="#">LinkedIn</a></div>
-      </div>
+<footer>
+  <div class="container footbar" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px">
+    <div style="display:flex;align-items:center;gap:10px"><div class="logo" aria-hidden="true"></div><span>Hungary Immigration</span></div>
+    <div class="footlinks" style="display:flex;gap:14px;flex-wrap:wrap">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <span>•</span>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
     </div>
   </div>
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+(function(){
+  const $=(s,r=document)=>r.querySelector(s);const burger=$('#burger'), nav=$('#navMenu');
+  if(burger){burger.addEventListener('click',()=>{const open=nav.classList.toggle('open');burger.setAttribute('aria-expanded',open)})}
+})();
 </script>
-
 </body>
 </html>

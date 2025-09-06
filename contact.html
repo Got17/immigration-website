@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us – Hungary Immigration Services</title>
+  <meta name="description" content="Contact Hungary Immigration Services. Tell us about your case and we will reply within 1–2 business days." />
+  <link rel="canonical" href="/contact.html" />
+  <style>
+    :root{--bg:#0b1220;--surface:#101a2b;--surface-2:#0d1728;--border:#1e2a44;--muted:#8aa0c6;--text:#dbe7ff;--accent:#2d6cdf;--accent-2:#22b07d;--radius:18px;--max:1200px;--shadow:0 10px 30px rgba(0,0,0,.25)}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max),92vw);margin:0 auto}
+    header{position:sticky;top:0;z-index:10;background:rgba(13,23,40,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .hbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:12px 0}
+    .brand{display:inline-flex;align-items:center;gap:10px}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6aa1ff)}
+    .brand span{font-weight:700}
+    nav.mainnav{display:flex;gap:16px;justify-content:center}
+    nav.mainnav a{padding:8px 10px;border-radius:10px}
+    nav.mainnav a.active,nav.mainnav a:hover{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));outline:1px solid var(--border)}
+    .actions{display:flex;justify-content:flex-end}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--accent);color:#fff;border:0;box-shadow:var(--shadow)}
+    .btn.secondary{background:transparent;border:1px solid var(--border);box-shadow:none;color:var(--text)}
+    .burger{display:none}
+    .navmenu{display:none}
+    @media (max-width:900px){.hbar{grid-template-columns:auto 1fr auto}nav.mainnav{display:none}.burger{display:inline-flex;background:transparent;border:1px solid var(--border);border-radius:10px;padding:8px;color:var(--text)}.navmenu{display:none;background:var(--surface-2);border-top:1px solid var(--border)}.navmenu.open{display:grid}.navmenu a{padding:12px 16px;border-bottom:1px solid var(--border)}}
+
+    .pagehead{padding:0 0 20px;background:radial-gradient(1000px 400px at 50% -10%, rgba(45,108,223,.18), transparent 60%)}
+    .banner{height:320px;border-radius:18px;border:1px solid var(--border);background-size:cover;background-position:center;box-shadow:var(--shadow)}
+    h1{margin:16px 0 6px}
+    .muted{color:var(--muted)}
+    .section{padding:36px 0}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+    .input, textarea, select{width:100%;background:var(--surface);border:1px solid var(--border);padding:10px 12px;border-radius:12px;color:var(--text)}
+    textarea{min-height:140px}
+
+    footer{background:var(--surface-2);border-top:1px solid var(--border);padding:20px 0;color:var(--muted)}
+    .footbar{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}
+    .footlinks{display:flex;gap:14px;flex-wrap:wrap}
+
+    .toast{position:fixed;bottom:16px;right:16px;background:var(--surface-2);border:1px solid var(--border);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:100}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container hbar">
+    <a class="brand" href="index.html"><div class="logo" aria-hidden="true"></div><span>Hungary Immigration</span></a>
+    <nav class="mainnav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About-us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html" class="active">Contact us</a>
+    </nav>
+    <div class="actions">
+      <a class="btn secondary" href="client-portal.html">Login</a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="navMenu">☰</button>
+    </div>
+  </div>
+  <div id="navMenu" class="navmenu container" role="menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About-us</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html" class="active">Contact us</a>
+  </div>
+</header>
+
+<main>
+  <section class="pagehead container">
+    <!-- Banner: Pexels 7709145 customer support -->
+    <div class="banner" role="img" aria-label="Customer support representative with headset" style="background-image:url('https://images.pexels.com/photos/7709145/pexels-photo-7709145.jpeg?auto=compress&cs=tinysrgb&w=1400&h=420&fit=crop')"></div>
+    <h1>Contact Us</h1>
+    <p class="muted">Tell us about your case. We’ll reply within 1–2 business days.</p>
+  </section>
+
+  <section class="container section">
+    <div class="grid">
+      <div class="card">
+        <h2>Send a message</h2>
+        <form id="contactForm" novalidate>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label class="muted">Full name</label>
+              <input class="input" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div>
+              <label class="muted">Email</label>
+              <input class="input" id="email" name="email" type="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div>
+              <label class="muted">Service</label>
+              <select class="input" id="service" name="service">
+                <option>Residence Permit</option>
+                <option>Work Permit</option>
+                <option>Study in Hungary</option>
+                <option>Company Registration</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="muted">Phone (optional)</label>
+              <input class="input" id="phone" name="phone" placeholder="+36 …" />
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <label class="muted">Message</label>
+            <textarea class="input" id="message" name="message" placeholder="Briefly describe your situation" required></textarea>
+          </div>
+          <div style="margin-top:10px">
+            <label class="muted"><input type="checkbox" id="consent" /> I agree to the privacy notice & data processing for contacting me.</label>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
+            <button type="reset" class="btn secondary">Clear</button>
+            <button type="submit" class="btn">Send</button>
+          </div>
+          <div class="muted" style="font-size:12px;margin-top:6px">This demo stores your inquiry locally in your browser (no server).</div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Office & Hours</h2>
+        <!-- Pexels 30992796 parliament night variant as visual -->
+        <img alt="Hungarian Parliament at night" style="border-radius:14px;border:1px solid var(--border);margin-bottom:10px" src="https://images.pexels.com/photos/30992796/pexels-photo-30992796.jpeg?auto=compress&cs=tinysrgb&w=1200&h=780&fit=crop"/>
+        <ul class="muted" style="line-height:1.7">
+          <li><strong>Email:</strong> hello@example.com</li>
+          <li><strong>Phone:</strong> +36 1 234 5678</li>
+          <li><strong>Hours:</strong> Mon–Fri 9:00–17:00 (CET)</li>
+          <li><strong>Address:</strong> Budapest, Hungary</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footbar">
+    <div style="display:flex;align-items:center;gap:10px"><div class="logo" aria-hidden="true"></div><span>Hungary Immigration</span></div>
+    <div class="footlinks">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <span>•</span>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" class="toast">Message sent. We’ll get back to you soon.</div>
+
+<script>
+(function(){
+  const $=(s,r=document)=>r.querySelector(s);
+  const burger=$('#burger'), nav=$('#navMenu'); if(burger){burger.addEventListener('click',()=>{const open=nav.classList.toggle('open');burger.setAttribute('aria-expanded',open)})}
+  const toast=$('#toast');
+  const form=$('#contactForm');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=$('#name').value.trim();
+    const email=$('#email').value.trim();
+    const message=$('#message').value.trim();
+    const consent=$('#consent').checked;
+    if(!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !message){return show('Please complete all required fields with a valid email.');}
+    if(!consent){return show('Please accept the privacy notice to proceed.');}
+    const inquiry={ts:Date.now(),name,email,service:$('#service').value,phone:$('#phone').value.trim(),message};
+    const key='publicWebsite.inquiries.v1';
+    const arr=JSON.parse(localStorage.getItem(key)||'[]'); arr.push(inquiry); localStorage.setItem(key,JSON.stringify(arr));
+    form.reset(); show('Message sent. We\'ll get back to you soon.');
+  });
+  function show(text){toast.textContent=text;toast.style.display='block';clearTimeout(show._t);show._t=setTimeout(()=>toast.style.display='none',2500)}
+})();
+</script>
+</body>
+</html>
